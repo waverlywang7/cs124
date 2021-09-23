@@ -14,19 +14,17 @@ h3 {
      color: orange;
  }
 
-#listitem2done{
-    text-decoration: line-through;
-}
-
-#listitem2done{
-    text-decoration: line-through;
-}
-
-#listitem4done{
-    text-decoration: line-through;
-
-}
-
 .crossout{
+    text-decoration: line-through;
+}
+
+#listitem2check{
+    text-decoration: line-through;
+}
+::placeholder {
+    font-style: italic;
+}
+
+#callmom{
     text-decoration: line-through;
 }
