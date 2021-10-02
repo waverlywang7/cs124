@@ -1,6 +1,17 @@
+XX NCR: You should have a header here and should have some introductory information as to what this document is about.  Who is designed what and why?
 
+NCR: You were supposed to create a Pull Request and assign me as a reviewer.
+
+
+NCR: What's this minus sign?
 -alternative designs you considered, including images
 any user testing you did
+NCR: You can't refer to images on your local machine. They've got to be in the repository!
+NCR: Only 3 images are shown. I can't understand the flow from this.
+NCR: Looking at https://waverlywang7.github.io/cs124/Aemptylist.html with a 320x640 screen, the text and all the user interface elements are super tiny. How would a user on a phone use this?
+NCR: You need intermediate images showing, for example, how the user is actually entering a new task. You just show before and after without the important intermediate steps.
+
+
 ![](../../../../Desktop/waverlycs124/Emptylistfirstdraft.png)
 
 Figure 1a.
@@ -10,6 +21,8 @@ Also, the number 5 was arbitrary and didn't give the user a chance to decide how
 ![](../../../../Desktop/waverlycs124/uncompleted tasksdraft.png)
 We were going to have a separate page for "Uncompleted Tasks", but we realized
 the switching around of headings might cause confusion. We just wanted the interface to be on one page that would allow you to check or uncheck any of your tasks and would let the user hide or show completed/uncompleted tasks.
+NCR: Sounds like you're trying to create tabs: here's an example of how that might look: https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html
+
 Also, we realized once you checked uncompleted tasks, they would become completed and we would have to have them disappear from the "Uncompleted Tasks" page.
 
 
