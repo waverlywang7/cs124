@@ -1,3 +1,11 @@
+NCR Overall:
+  * Missing many intermediate steps in design walkthrough
+  * Some testing done
+  * Some design iteration done
+  * Not designed well for 360x640 screen
+  * Missing Pull Request
+
+
 XX NCR: You should have a header here and should have some introductory information as to what this document is about.  Who is designed what and why?
 
 NCR: You were supposed to create a Pull Request and assign me as a reviewer.
