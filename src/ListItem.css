@@ -1,0 +1,27 @@
+body{
+    font-family: "Helvetica";
+    color: lightslategray;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    flex-start: center;
+    padding-left: 20px;
+    font-size: 24pt;
+}
+input{
+    font-size: 24pt;
+    display: grid;
+}
+
+button{
+    font-size: 24pt;
+    display: grid;
+}
+h3 {
+    font-size: 12pt;
+    letter-spacing: 3px;
+}
+h3:hover{
+    color: orange;
+}

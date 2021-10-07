@@ -1,25 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import MyList from './MyList';
+import React from "react";
+import { useState } from 'react';
+//
+// function createInputBar() {
+//     var x = document.createElement("INPUT");
+//     x.setAttribute("type", "text");
+//     x.setAttribute("value", "What do you want to do?...");
+// }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+function App(props) {
+    const [data, setData] = useState(props.initialList);
+    function handleItemAdded(item) {
+        setData([...data, item]);
+    }
+    return <div>
+        <MyList list={data} onItemAdded={handleItemAdded} /></div>; // onAddChange
+};
+
 
 export default App;
