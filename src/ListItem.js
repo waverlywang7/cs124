@@ -12,7 +12,7 @@ function ListItem(props) {
              id={props.id}
              onClick={(e) => {
                  props.onRowClick(e.currentTarget.id);
-             }}
+            }}
         >
             <input type = "checkbox" id = "listitem0" name =" listitem0" value="test" /><ListItemField field="name" {...props}/>
         {/*<>*/}
