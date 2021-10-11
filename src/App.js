@@ -3,6 +3,7 @@ import './App.css';
 import MyList from './MyList';
 import React from "react";
 import { useState } from 'react';
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 
 function App(props) {
@@ -22,7 +23,7 @@ function App(props) {
             listItem => listItem.id !==listItemId
                 ? listItem
                 : {...listItem, [field]: value},
-            props.value = !value,
+            // props.value = !value,
         ))
     }
 

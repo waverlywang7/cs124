@@ -8,6 +8,7 @@ function ListItem(props) {
     if (props.selected) {
         classes.push("selected");
     }
+    console.log(props.completed);
     return (
         <div className={classes.join(" ")}
              key={props.id}
@@ -15,11 +16,8 @@ function ListItem(props) {
              onClick={(e) => {
                  props.onRowClick(e.currentTarget.id);
              }}
-        ><input type="checkbox" onChange={
-            event => {
-                handleListItemFieldChanged(props.id, props.completed, event.target.value)
-            }
-        } id="listitem0" name=" listitem0" value="test"/><ListItemField field="name" {...props}/>
+        ><input type="checkbox" onChange={handleListItemFieldChanged}
+                id="listitem0" name=" listitem0" value="test"/><ListItemField field="name" {...props}/>
             <ListItemField field="name" {...props}/>
             <ListItemField field="completed" {...props}/>
             {/*<>*/}

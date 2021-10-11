@@ -52,16 +52,6 @@ function MyList(props) {
                 Delete Task
             </button>}
 
-            {/*<ul>*/}
-            {/*    {props.list.map(e =>*/}
-            {/*            <ul key = {e.id}>*/}
-            {/*                <ListItem {...e}/>*/}
-            {/*            </ul>*/}
-            {/*        )}*/}
-            {/*</ul>*/}
-            {/*<div>*/}
-            {/*    {props.list.map(element => <div>{element}</div>)}*/}
-            {/*</div>*/}
             </div>);
             }
 export default MyList;
