@@ -41,7 +41,7 @@ function MyList(props) {
                 onListItemFieldChanged={props.onListItemFieldChanged}
                 selected={a.id === selectedId}
                 key={a.id}
-                onChecked={props.onChecked}
+                onChecked={props.onChecked} //needed?
                 {...a} />)}
 
             {selectedId && <button type="button" onClick={

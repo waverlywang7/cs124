@@ -21,14 +21,9 @@ function App(props) {
         setData(data.map(
             listItem => listItem.id !==listItemId
                 ? listItem
-                : {...listItem, [field]: value}
-
-            listItem =>
-
-                value = true;
-            }
+                : {...listItem, [field]: value},
+            props.value = !value,
         ))
-
     }
 
 
