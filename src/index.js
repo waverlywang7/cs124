@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const initialData = ["Eat Lunch"];
+const initialData = [{
+     name: 'eat lunch',
+     id: 'abc',
+     completed: false
+},{
+     name: 'feed rock',
+     id: 'def',
+     completed: false
+}];
 
 // function InMemoryApp(props) {
 //      return <App data={props.initialData}/>

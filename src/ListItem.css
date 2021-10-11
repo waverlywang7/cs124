@@ -11,12 +11,12 @@ body{
 }
 input{
     font-size: 24pt;
-    display: grid;
+    display: flex;
 }
 
 button{
     font-size: 24pt;
-    display: grid;
+    display: flex;
 }
 h3 {
     font-size: 12pt;
