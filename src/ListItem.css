@@ -1,28 +1,54 @@
-body{
-    font-family: "Avenir";
-    color: #119DA4;
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: space-evenly;
-    flex-start: center;
-    padding-left: 20px;
-    font-size: 24pt;
-    background-color: #1F2041;
+body {
+        font-family: "Avenir";
+        color: #119DA4;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        flex-start: center;
+        padding-left: 20px;
+        font-size: 24pt;
+        background-color: #463E52;
 }
+
 input{
-    font-size: 24pt;
+    font-family: "Avenir";
+    font-size: 18pt;
     display: flex;
 }
 
 button{
-    font-size: 24pt;
+    font-family: "Avenir";
+    font-size: 16pt;
     display: flex;
+    margin: 0;
+    padding: 8px 15px;
+
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    width: auto
 }
+button::-moz-focus-inner {
+    border: 0;
+}
+
 h3 {
     font-size: 12pt;
     letter-spacing: 3px;
 }
 h3:hover{
     color: orange;
+}
+
+.container > * {
+    display: inline-block;
+}
+
+.container2 > * {
+    display: inline-block;
 }

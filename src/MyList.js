@@ -1,7 +1,7 @@
 import ListItem from "./ListItem.js";
 import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
-
+import setData from "./App.js";
 function MyList(props) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
@@ -20,6 +20,17 @@ function MyList(props) {
         // console.log(data);
     }
 
+    function toggleListItemCompleted(id){
+        console.log(props.list[0]);
+        const updatedMyList = props.list.map(a => {
+            if (id == a.id) {
+                return {...a, completed: !a.completed}
+            }
+            return a;
+            setNewItem(updatedMyList);
+        });
+
+    }
 
     // function handleUpdateData(id, field, newValue) {
     //     var newData = data.map( p => parseInt(p.id) === parseInt(id) ? {...p, [field]: [newValue]} : p);
@@ -31,26 +42,33 @@ function MyList(props) {
         <div>
             <h2> My List </h2>
             <button onClick={() => setShowCompletedItems(!showCompletedItems)}> Show Completed Tasks </button>
-            <h3> Show Uncompleted Tasks </h3>
+            <button> Show Uncompleted Tasks </button>
+            <br />
             <input type="text" ref={input} id="myInput" placeholder="I need to..."/>
-            <button onClick={handleAdd}>Add</button>
+            <div class="container">
+                <button onClick={handleAdd}>Add</button>
+                {selectedId && <button type="button" onClick={
+                    () => {
+                        props.onDeleteListItem(selectedId);
+                        setSelectedId(null);
+                    }}>
+                    Delete Task
+                </button>
+                }
+            </div><br />
 
-            {props.list.map(a=> <ListItem
+
+            {props.list.map(a=>
+                <ListItem
                 onRowClick={(id) =>
                     setSelectedId(id)}
                 onListItemFieldChanged={props.onListItemFieldChanged}
                 selected={a.id === selectedId}
                 key={a.id}
-                onChecked={props.onChecked} //needed?
+                name={a.name}
+                toggleListItemCompleted={toggleListItemCompleted}
+                completed={a.completed} //needed?
                 {...a} />)}
-
-            {selectedId && <button type="button" onClick={
-                () => {
-                    props.onDeleteListItem(selectedId);
-                    setSelectedId(null);
-                }}>
-                Delete Task
-            </button>}
 
             </div>);
             }
