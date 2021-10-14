@@ -6,7 +6,7 @@ body {
     flex-grow: 1;
     justify-content: space-evenly;
     flex-start: center;
-    padding-left: 20px;
+    padding-left: 24px;
     font-size: 24pt;
     background-color: #463E52;
 }
@@ -37,22 +37,29 @@ button{
     width: 275px;
 
 }
-button:active,
-button:focus,
-[role="button"][aria-pressed="true"] {
-    border: 2px solid #000;
-    background-color: #660F56;
-}
-button::-moz-focus-inner {
-    border: 0;
-}
+/*button:active,*/
+/*button:focus,*/
+/*[role="button"][aria-pressed="true"] {*/
+/*    border: 2px solid #000;*/
+/*    background-color: #660F56;*/
+/*}*/
+/*button::-moz-focus-inner {*/
+/*    border: 0;*/
+/*}*/
 
 .deleteAllButton{
     font-size: 3px;
     color: red;
     text-decoration: #cc7832;
 }
+.selected1 {
+    border: 2px solid #000;
+    background-color: #660F56;
 
+}
+.unselected1 {
+
+}
 
 h3 {
     font-size: 12pt;
@@ -66,8 +73,9 @@ h3:hover{
     display: inline-block;
 }
 
-.container3{
-    color: red;
+.deleteTask{
+    color: mediumseagreen;
+    text-align: center;
 }
 .container2 > * {
     display: inline-block;

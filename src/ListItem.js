@@ -52,9 +52,8 @@ function ListItem(props) {
                 type="checkbox"
                 onChange={(e) => props.onListItemFieldChanged(props.id, "completed", e.target.checked )}
                 id={props.id}
-                name=" listitem0"
-                defaultChecked={false}
-                value="test"/>
+                checked={props.completed}
+            />
 
             <ListItemField field="name" {...props}/>
 

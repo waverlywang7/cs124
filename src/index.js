@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-const initialData = [];
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
+const initialData = [{ name: "",
+    id: generateUniqueID(),
+    completed: false}]
+;
 
-// function InMemoryApp(props) {
-//      return <App data={props.initialData}/>
-// }
 ReactDOM.render(
     <React.StrictMode>
      <App initialList={initialData}/>
      </React.StrictMode>,
     document.getElementById('root')
 );
-
 
 
 
