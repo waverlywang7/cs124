@@ -14,9 +14,17 @@ function App(props) {
         setData(data.filter(listItem => listItem.id !==listItemId))
     }
 
+
+
     function handleItemAdded(item) {
         console.log("item" + item)
+
         setData([...data, item]);
+    }
+
+    function handleDeleteAll() {
+        let filteredList = data.filter(listItem => !listItem.completed);
+        setData(filteredList);
     }
 
     function handleListItemFieldChanged(listItemId, field, value) {
@@ -24,19 +32,19 @@ function App(props) {
             listItem => listItem.id !==listItemId
                 ? listItem
                 : {...listItem, [field]: value},
-            // props.value = !value,
         ))
+    };
+
+    function displayFilteredList() {
+
     }
-
-
-
-
     return <div>
         <MyList list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
-                //onToggleListItemCompleted={toggleListItemCompleted}
+                onDeleteAll={handleDeleteAll}
+                //onToggleCompletedItems={toggleCompletedItems}
         /></div>;
 };
 

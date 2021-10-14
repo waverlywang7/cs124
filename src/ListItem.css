@@ -1,14 +1,18 @@
 body {
-        font-family: "Avenir";
-        color: #119DA4;
-        display: flex;
-        flex-direction: row;
-        flex-grow: 1;
-        justify-content: space-evenly;
-        flex-start: center;
-        padding-left: 20px;
-        font-size: 24pt;
-        background-color: #463E52;
+    font-family: "Avenir";
+    color: #119DA4;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    flex-start: center;
+    padding-left: 20px;
+    font-size: 24pt;
+    background-color: #463E52;
+}
+
+input[type=checkbox]{
+    transform: scale(3);
 }
 
 input{
@@ -22,8 +26,7 @@ button{
     font-size: 16pt;
     display: flex;
     margin: 0;
-    padding: 8px 15px;
-
+    padding: 8px 8px;
     overflow: visible;
     background: transparent;
     color: inherit;
@@ -31,11 +34,25 @@ button{
     -webkit-font-smoothing: inherit;
     -moz-osx-font-smoothing: inherit;
     -webkit-appearance: none;
-    width: auto
+    width: 275px;
+
+}
+button:active,
+button:focus,
+[role="button"][aria-pressed="true"] {
+    border: 2px solid #000;
+    background-color: #660F56;
 }
 button::-moz-focus-inner {
     border: 0;
 }
+
+.deleteAllButton{
+    font-size: 3px;
+    color: red;
+    text-decoration: #cc7832;
+}
+
 
 h3 {
     font-size: 12pt;
@@ -49,6 +66,18 @@ h3:hover{
     display: inline-block;
 }
 
+.container3{
+    color: red;
+}
 .container2 > * {
     display: inline-block;
+}
+
+.container2{
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+input{
+    margin:0 10px;
 }

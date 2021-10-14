@@ -48,25 +48,17 @@ function ListItem(props) {
              }}
         >
             <div class= "container2">
-                <input
-                    type="checkbox"
-                    //checked={props.completed}
-                    //onClick={}
-                    onChange={() => props.toggleListItemCompleted(props.id)}
-                    id={props.id}
-                    name=" listitem0"
-                    defaultChecked={props.completed}
-                    value="test"/>
+            <input
+                type="checkbox"
+                onChange={(e) => props.onListItemFieldChanged(props.id, "completed", e.target.checked )}
+                id={props.id}
+                name=" listitem0"
+                defaultChecked={false}
+                value="test"/>
 
-                <ListItemField field="name" {...props}/>
+            <ListItemField field="name" {...props}/>
+
             </div>
-            {/*<ListItemField field="name" {...props}/>*/}
-            {/*<ListItemField field="completed" {...props}/>*/}
-            {/*<>*/}
-            {/*    <input type = "checkbox" id = "listitem0" name =" listitem0" value="test" />*/}
-            {/*    /!*<label htmlFor="listitem0">{props.name}</label>*!/*/}
-            {/*    /!*<br />*!/*/}
-            {/*</>*/}
         </div>
     )
 }
