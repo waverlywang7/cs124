@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import MyList from './MyList';
 import React from "react";
@@ -13,8 +12,6 @@ function App(props) {
     function handleDeleteListItem(listItemId){
         setData(data.filter(listItem => listItem.id !==listItemId))
     }
-
-
 
     function handleItemAdded(item) {
         console.log("item" + item)
