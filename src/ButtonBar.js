@@ -1,7 +1,6 @@
-
+import "./ButtonBar.css"
 function ButtonBar(props){
     return(
-        // <button type="button" onClick={props.onToggleCompletedItems}> Show Completed Tasks </button>
     <button
         type="button"
         className={props.isSelected ? "selected1" : "unselected1"}

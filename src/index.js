@@ -4,10 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
-const initialData = [{ name: "",
-    id: generateUniqueID(),
-    completed: false}]
-;
+const initialData = [];
 
 ReactDOM.render(
     <React.StrictMode>
@@ -15,8 +12,6 @@ ReactDOM.render(
      </React.StrictMode>,
     document.getElementById('root')
 );
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

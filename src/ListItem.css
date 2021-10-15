@@ -1,15 +1,3 @@
-body {
-    font-family: "Avenir";
-    color: #119DA4;
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: space-evenly;
-    flex-start: center;
-    padding-left: 24px;
-    font-size: 24pt;
-    background-color: #463E52;
-}
 
 input[type=checkbox]{
     transform: scale(3);
@@ -20,32 +8,6 @@ input{
     font-size: 18pt;
     display: flex;
 }
-
-button{
-    font-family: "Avenir";
-    font-size: 16pt;
-    display: flex;
-    margin: 0;
-    padding: 8px 8px;
-    overflow: visible;
-    background: transparent;
-    color: inherit;
-    line-height: normal;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-    width: 275px;
-
-}
-/*button:active,*/
-/*button:focus,*/
-/*[role="button"][aria-pressed="true"] {*/
-/*    border: 2px solid #000;*/
-/*    background-color: #660F56;*/
-/*}*/
-/*button::-moz-focus-inner {*/
-/*    border: 0;*/
-/*}*/
 
 .deleteAllButton{
     font-size: 3px;
@@ -77,9 +39,16 @@ h3:hover{
     color: mediumseagreen;
     text-align: center;
 }
+
+.addTask{
+    color: #119DA4;
+    text-align: center;
+}
+
 .container2 > * {
     display: inline-block;
 }
+
 
 .container2{
     justify-content: space-between;
