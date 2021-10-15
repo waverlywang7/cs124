@@ -47,6 +47,9 @@ button::-moz-focus-inner {
     border: 0;
 }
 
+
+
+
 .deleteAllButton{
     font-size: 3px;
     color: red;
