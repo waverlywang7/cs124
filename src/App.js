@@ -3,9 +3,6 @@ import MyList from './MyList';
 import React from "react";
 import { useState } from 'react';
 import './ListItem.js'
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
-
-
 function App(props) {
     const [data, setData] = useState(props.initialList);
 
@@ -32,18 +29,13 @@ function App(props) {
         ))
     };
 
-    function displayFilteredList() {
-
-    }
     return <div>
         <MyList list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
-                //onToggleCompletedItems={toggleCompletedItems}
         /></div>;
 };
-
 
 export default App;

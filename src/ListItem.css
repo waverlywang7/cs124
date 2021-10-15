@@ -1,15 +1,3 @@
-body {
-    font-family: "Avenir";
-    color: #119DA4;
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: space-evenly;
-    flex-start: center;
-    padding-left: 24px;
-    font-size: 24pt;
-    background-color: #463E52;
-}
 
 input[type=checkbox]{
     transform: scale(3);
@@ -21,6 +9,7 @@ input{
     display: flex;
 }
 
+<<<<<<< HEAD
 button{
     font-family: "Avenir";
     font-size: 16pt;
@@ -50,6 +39,8 @@ button{
 
 
 
+=======
+>>>>>>> 21b8d3de6c5542daebe46cb796f6d1add36411be
 .deleteAllButton{
     font-size: 3px;
     color: red;
@@ -80,9 +71,16 @@ h3:hover{
     color: mediumseagreen;
     text-align: center;
 }
+
+.addTask{
+    color: #119DA4;
+    text-align: center;
+}
+
 .container2 > * {
     display: inline-block;
 }
+
 
 .container2{
     justify-content: space-between;
