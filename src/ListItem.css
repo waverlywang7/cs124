@@ -1,0 +1,92 @@
+
+input[type=checkbox]{
+    transform: scale(3);
+}
+
+input{
+    font-family: "Avenir";
+    font-size: 18pt;
+    display: flex;
+}
+
+<<<<<<< HEAD
+button{
+    font-family: "Avenir";
+    font-size: 16pt;
+    display: flex;
+    margin: 0;
+    padding: 8px 8px;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+    width: 275px;
+
+}
+/*button:active,*/
+/*button:focus,*/
+/*[role="button"][aria-pressed="true"] {*/
+/*    border: 2px solid #000;*/
+/*    background-color: #660F56;*/
+/*}*/
+/*button::-moz-focus-inner {*/
+/*    border: 0;*/
+/*}*/
+
+
+
+
+=======
+>>>>>>> 21b8d3de6c5542daebe46cb796f6d1add36411be
+.deleteAllButton{
+    font-size: 3px;
+    color: red;
+    text-decoration: #cc7832;
+}
+.selected1 {
+    border: 2px solid #000;
+    background-color: #660F56;
+
+}
+.unselected1 {
+
+}
+
+h3 {
+    font-size: 12pt;
+    letter-spacing: 3px;
+}
+h3:hover{
+    color: orange;
+}
+
+.container > * {
+    display: inline-block;
+}
+
+.deleteTask{
+    color: mediumseagreen;
+    text-align: center;
+}
+
+.addTask{
+    color: #119DA4;
+    text-align: center;
+}
+
+.container2 > * {
+    display: inline-block;
+}
+
+
+.container2{
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+input{
+    margin:0 10px;
+}
