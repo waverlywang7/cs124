@@ -9,7 +9,7 @@ input{
     display: flex;
 }
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD*/
 button{
     font-family: "Avenir";
     font-size: 16pt;
@@ -38,9 +38,9 @@ button{
 
 
 
-
-=======
->>>>>>> 21b8d3de6c5542daebe46cb796f6d1add36411be
+/*0*/
+/*=======*/
+/*>>>>>>> 21b8d3de6c5542daebe46cb796f6d1add36411be*/
 .deleteAllButton{
     font-size: 3px;
     color: red;

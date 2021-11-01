@@ -3,22 +3,26 @@ import './MyList.css';
 import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
+import query from "./App.js"
+//import {onSnapshot} from "firebase/firebase-firestore";
 
 function MyList(props) {
-    const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
-    const [selectedId, setSelectedId] = useState(null);
-    const [showCompletedItems, setShowCompletedItems] = useState("All");
-    const [isNotEmpty, setIsNotEmpty] = useState(false);
-    const [containsCompleted, setContainsCompleted] = useState(false);
+   const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
+   const [selectedId, setSelectedId] = useState(null);
+   const [showCompletedItems, setShowCompletedItems] = useState("All");
+   const [isNotEmpty, setIsNotEmpty] = useState(false);
+   const [containsCompleted, setContainsCompleted] = useState(false);
 
     const input = useRef(null);
 
     function handleAdd() {
         const newItem = {name: input.current.value, id: generateUniqueID(), completed: false}
         setNewItem(newItem);
-        props.onItemAdded(newItem);
+        // query.onSnapshot(querySnapshot => query.update(newItem)
+        //     )
+       props.onItemAdded(newItem.name);
         input.current.value = "";
-        setIsNotEmpty(false);
+       setIsNotEmpty(false);
 
     }
 
@@ -68,6 +72,19 @@ function MyList(props) {
             </div>
             }
 
+            <button type="button" name="sortbyname" onClick={() => {
+                props.onSort("name", "asc");
+            }}>Sort By Name</button>
+
+            <button type="button" name="sortbycreationdate" onClick={() => {
+                props.onSort("creationDate", "asc");
+
+
+            }}>Sort By Creation Date</button>
+
+            <button type="button" name="priority" onClick={() => {
+                props.onSort("name", "asc");
+            }}>Sort By Priority</button>
                 {selectedId && <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
                         () => {
@@ -81,7 +98,7 @@ function MyList(props) {
             <br/>
             <div> {tasks} </div>
             <br/>
-            {<div class="deleteAllButton">
+            {containsCompleted && <div class="deleteAllButton">
                 <button type="button" onClick={
                     () => {
                         props.onDeleteAll(selectedId);
