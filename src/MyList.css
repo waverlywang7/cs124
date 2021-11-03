@@ -1,6 +1,11 @@
+.myList{
+    position: absolute;
+    left: 0.5cm;
+}
+
 body {
     font-family: "Avenir";
-    color: #119DA4;
+    color: White;
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -8,15 +13,25 @@ body {
     flex-start: center;
     padding-left: 24px;
     font-size: 24pt;
-    background-color: #463E52;
+    background-color: #83A1CD;
+    align-content: flex-start;
 }
 
 
+.inputbar {
+    display: flex;
+    align-content: flex-start;
+    margin-bottom: 0.5cm;
+    margin: 0 -5px;
+}
+
 button{
     font-family: "Avenir";
-    font-size: 15pt;
+    border-style: solid;
+    border: 2px solid #4B73CA;
+    font-size: 10pt;
     display: flex;
-    margin: 0;
+    margin: 3px;
     padding: 8px 8px;
     overflow: visible;
     background: transparent;
@@ -25,6 +40,15 @@ button{
     -webkit-font-smoothing: inherit;
     -moz-osx-font-smoothing: inherit;
     -webkit-appearance: none;
-    width: 275px;
+    width: auto;
+    length: auto;
+    margin-bottom: 0.5cm;
+
+
+}
+
+.deleteButtons{
+    display: flex;
+    align-content: flex-start;
 
 }

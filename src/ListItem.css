@@ -9,9 +9,9 @@ input{
     display: flex;
 }
 
-/*<<<<<<< HEAD*/
 button{
     font-family: "Avenir";
+    border-radius: 4px;
     font-size: 16pt;
     display: flex;
     margin: 0;
@@ -26,29 +26,13 @@ button{
     width: 275px;
 
 }
-/*button:active,*/
-/*button:focus,*/
-/*[role="button"][aria-pressed="true"] {*/
-/*    border: 2px solid #000;*/
-/*    background-color: #660F56;*/
-/*}*/
-/*button::-moz-focus-inner {*/
-/*    border: 0;*/
-/*}*/
 
-
-
-/*0*/
-/*=======*/
-/*>>>>>>> 21b8d3de6c5542daebe46cb796f6d1add36411be*/
 .deleteAllButton{
-    font-size: 3px;
-    color: red;
-    text-decoration: #cc7832;
+    color: white;
 }
 .selected1 {
-    border: 2px solid #000;
-    background-color: #660F56;
+
+    background-color: #05386B;
 
 }
 .unselected1 {
@@ -68,12 +52,13 @@ h3:hover{
 }
 
 .deleteTask{
-    color: mediumseagreen;
+    color: white;
     text-align: center;
 }
 
 .addTask{
-    color: #119DA4;
+    display: inline;
+    color: white;
     text-align: center;
 }
 
@@ -84,7 +69,7 @@ h3:hover{
 
 .container2{
     justify-content: space-between;
-    margin: 0 -10px;
+    margin: 0 8px;
 }
 
 input{

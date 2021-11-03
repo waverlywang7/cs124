@@ -26,16 +26,15 @@ function App(props) {
     // query = listCollection.orderBy("name", "asc");
     const query = listCollection;
     // create a state
-    const [order, setOrder] = query.orderBy("name", "asc");
+    const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
     //const query = listCollection;
     //if (order) {
 
     //}
-    console.log(order);
-    const [value, loading, error] = useCollection(query);
-    const [creationDateAscending, setCreationDateAscending] = useState(false); // TODO: WE ARE WORKING ON SORTING
-    const [priorityAscending, setPriorityAscending] = useState(false);
-    const [nameAscending, setNameAscending] = useState(false);
+    const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
+    // const [creationDateAscending, setCreationDateAscending] = useState(false);
+    // const [priorityAscending, setPriorityAscending] = useState(false);
+    // const [nameAscending, setNameAscending] = useState(false);
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>
@@ -43,21 +42,18 @@ function App(props) {
     }
 
 
-    // const [data, setData] = useState(props.initialList);
-
     function handleDeleteListItem(listItemId){
         // setData(data.filter(listItem => listItem.id !==listItemId))
         listCollection.doc(listItemId).delete();
     }
 
     function handleItemAdded(item) {
-        // console.log("item" + item)
         //var uid =
         const newItem = {
                 id: generateUniqueID(),
                 priority: "low",
                 name: item,
-                creationDate: "00-00-00",
+                creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
                 completed: false
             };
             listCollection.doc(newItem.id).set(newItem);
@@ -75,14 +71,13 @@ function App(props) {
     }
 
     function handleListItemFieldChanged(listItemId, field, value) {
-        console.log("listItem ID", listItemId);
         listCollection.doc(listItemId).update({
             [field]: value,
         });
     }
 
     function handleSort(name, direction) {
-        setOrder(name, direction);
+        setOrder({sortField: name, sortDirection: direction});
     }
         //  setData(data.map(
         //     listItem => listItem.id !==listItemId
