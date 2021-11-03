@@ -15,20 +15,22 @@ button{
     font-size: 16pt;
     display: flex;
     margin: 0;
-    padding: 8px 8px;
-    overflow: visible;
-    background: transparent;
+    /*padding: 8px 8px;*/
+    overflow: hidden;
     color: inherit;
     line-height: normal;
     -webkit-font-smoothing: inherit;
     -moz-osx-font-smoothing: inherit;
     -webkit-appearance: none;
     width: 275px;
+    borderStyle: solid;
+
 
 }
 
 .deleteAllButton{
     color: white;
+
 }
 .selected1 {
 

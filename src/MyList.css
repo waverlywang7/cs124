@@ -25,6 +25,10 @@ body {
     margin: 0 -5px;
 }
 
+#myInput {
+    width: 225px;
+}
+
 button{
     font-family: "Avenir";
     border-style: solid;
@@ -33,7 +37,7 @@ button{
     display: flex;
     margin: 3px;
     padding: 8px 8px;
-    overflow: visible;
+    overflow: hidden;
     background: transparent;
     color: inherit;
     line-height: normal;
@@ -42,13 +46,20 @@ button{
     -webkit-appearance: none;
     width: auto;
     length: auto;
-    margin-bottom: 0.5cm;
+    /*margin-bottom: 0.5cm;*/
 
 
+}
+
+#deleteAll{
+    background-color:palevioletred;
+}
+
+#delete{
+    background-color:lightgreen;
 }
 
 .deleteButtons{
     display: flex;
     align-content: flex-start;
-
 }

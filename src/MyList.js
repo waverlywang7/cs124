@@ -70,6 +70,21 @@ function MyList(props) {
     }
 
 
+    function checkIfOneSelected() {
+        let count = 0;
+        for (let i = 0; i < props.list.length; i++) {
+            console.log(props.list[i]);
+            if (props.list[i].completed === true) {
+                count++;
+            }
+        }
+        if (count === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     return (
         <div class = "myList">
             <h2> MY LIST </h2>
@@ -101,17 +116,17 @@ function MyList(props) {
             </button>
             <br/>
             <div class="deleteButtons">
-                {selectedId && <div class="deleteTask">
+                {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
                         () => {
                             props.onDeleteListItem(selectedId);
                             setSelectedId(null);
                         }}>Delete Task
                     </button>
-                </div>
+                </div> : null
                 }
-                {checkIfContainsCompleted() ? <div class="deleteAllButton">
-                    <button type="button" onClick={
+                {(!checkIfOneSelected()) && checkIfContainsCompleted() ? <div class="deleteAllButton">
+                    <button type="button" id="deleteAll" onClick={
                         () => {
                             props.onDeleteAll(selectedId);
                         }}>
