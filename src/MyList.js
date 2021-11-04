@@ -15,13 +15,14 @@ function MyList(props) {
     const [containsCompleted, setContainsCompleted] = useState(false);
 
     const input = useRef(null);
+    const pInput = useRef(null);
 
     function handleAdd() {
-        const newItem = {name: input.current.value, id: generateUniqueID(), completed: false}
+        const newItem = {name: input.current.value, id: generateUniqueID(), completed: false, priority: pInput.current.value}
         setNewItem(newItem);
         // query.onSnapshot(querySnapshot => query.update(newItem)
         //     )
-        props.onItemAdded(newItem.name);
+        props.onItemAdded(newItem.name, newItem.priority);
         input.current.value = "";
         setIsNotEmpty(false);
 
@@ -73,7 +74,6 @@ function MyList(props) {
     function checkIfOneSelected() {
         let count = 0;
         for (let i = 0; i < props.list.length; i++) {
-            console.log(props.list[i]);
             if (props.list[i].completed === true) {
                 count++;
             }
@@ -93,10 +93,28 @@ function MyList(props) {
                 <input type="text" ref={input} id="myInput"
                        onChange={(e) => setIsNotEmpty(checkInput(e.target.value))}
                        placeholder="I need to..."/>
+
+                <div className="dropdown">
+                    {/*<button className="dropbtn">Priority</button>*/}
+
+                    <select name="Priority" ref={pInput} id="priorityInput">
+                        <option></option>
+                        <option value="low" >1</option>
+                        <option value="medium">2</option>
+                        <option value="high">3</option>
+                    </select>
+                    {/*<div className="dropdown-content">*/}
+                    {/*    <text> low </text>*/}
+                    {/*    <text> medium </text>*/}
+                    {/*    <text> high </text>*/}
+                    {/*</div>*/}
+                </div>
+
                 {isNotEmpty && <div class="addTask">
                     <button type="button" name="add" onClick={handleAdd}>Add Task</button>
                 </div>
                 }
+
             </div>
 
             <button type="button" name="sortbyname" onClick={() => {
@@ -111,7 +129,7 @@ function MyList(props) {
             </button>
 
             <button type="button" name="priority" onClick={() => {
-                props.onSort("name", "asc");
+                props.onSort("priority", "asc");
             }}>Sort By Priority
             </button>
             <br/>

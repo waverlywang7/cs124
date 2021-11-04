@@ -41,25 +41,21 @@ function App(props) {
             doc.data());
     }
 
-
     function handleDeleteListItem(listItemId){
         // setData(data.filter(listItem => listItem.id !==listItemId))
         listCollection.doc(listItemId).delete();
     }
 
-    function handleItemAdded(item) {
-        //var uid =
+    function handleItemAdded(item, newPriority) {
         const newItem = {
                 id: generateUniqueID(),
-                priority: "low",
+                priority: newPriority,
                 name: item,
                 creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
                 completed: false
             };
             listCollection.doc(newItem.id).set(newItem);
-
-        // const [value, loading, error] = useCollection(query);
-        // setData([...data, item]);
+            console.log(newItem);
     }
 
     function handleDeleteAll() {
