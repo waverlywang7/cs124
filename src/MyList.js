@@ -83,6 +83,19 @@ function MyList(props) {
         }
     }
 
+    function toggleDropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+// Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.sortDropdown')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
     return (
         <div class = "myList">
             <h2> MY LIST </h2>
@@ -109,22 +122,28 @@ function MyList(props) {
                 </div>
                 </div>
             </div>
+            <div className="dropdown">
+                <button onClick= "toggleDropdown()" className="sortDropdown">Sort
+                    <i class= "fa fa-caret-down"></i>
+                </button>
+                <div id="myDropdown" className="dropdown-content">
+                    <option type="button" name="sortbyname" id="sortButton1" onClick={() => {
+                        props.onSort("name", "asc");
+                    }}> Name
+                    </option>
 
-            <button type="button" name="sortbyname" onClick={() => {
-                props.onSort("name", "asc");
-            }}>Sort By Name
-            </button>
+                    <option type="button" name="sortbycreationdate" id="sortButton2" onClick={() => {
+                        props.onSort("creationDate", "asc");
 
-            <button type="button" name="sortbycreationdate" onClick={() => {
-                props.onSort("creationDate", "asc");
+                    }}> Creation Date
+                    </option>
 
-            }}>Sort By Creation Date
-            </button>
-
-            <button type="button" name="priority" onClick={() => {
-                props.onSort("priority", "asc");
-            }}>Sort By Priority
-            </button>
+                    <option type="button" name="priority" id="sortButton3" onClick={() => {
+                        props.onSort("priority", "asc");
+                    }}> Priority
+                    </option>
+                </div>
+            </div>
             <br/>
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
