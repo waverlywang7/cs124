@@ -25,9 +25,20 @@ body {
     margin: 0 -5px;
 }
 
+.prioritycontainer{
+    display: grid;
+    grid-column: 2;
+}
+
+
+#add{
+    background-color: orange;
+}
 #myInput {
     width: 150px;
 }
+
+
 
 button{
     font-family: "Avenir";
@@ -52,7 +63,9 @@ button{
 }
 
 #priorityText{
-    font-size:12pt;
+    padding-left: 2px;
+    font-size:10pt;
+    /*aligning the priority*/
 }
 
 #deleteAll{
@@ -60,7 +73,7 @@ button{
 }
 
 #delete{
-    background-color:lightgreen;
+    background-color:darkgreen;
 }
 
 .deleteButtons{
@@ -73,7 +86,7 @@ button{
     background-color: #04AA6D;
     color: white;
     padding: 16px;
-    font-size: 16px;
+    font-size: 10px;
     border: none;
 }
 

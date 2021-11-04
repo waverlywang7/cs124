@@ -93,10 +93,10 @@ function MyList(props) {
                        placeholder="I need to..."/>
 
                 {isNotEmpty && <div class="addTask">
-                    <button type="button" name="add" onClick={handleAdd}>Add Task</button>
+                    <button type="button" name="add" id="add" onClick={handleAdd}>Add Task</button>
                 </div>
                 }
-
+                <div id="prioritycontainer">
                 <text id = "priorityText"> Priority </text>
                 <div className="dropdown">
                     {/*<button className="dropbtn">Priority</button>*/}
@@ -106,6 +106,7 @@ function MyList(props) {
                         <option value="b" >medium</option>
                         <option value="a" >high</option>
                     </select>
+                </div>
                 </div>
             </div>
 
