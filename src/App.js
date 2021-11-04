@@ -23,14 +23,11 @@ const db = firebase.firestore();
 const collectionName = "waverlywang7-listitems";
 const listCollection = db.collection(collectionName);
 function App(props) {
-    // query = listCollection.orderBy("name", "asc");
     const query = listCollection;
     // create a state
     const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
     //const query = listCollection;
-    //if (order) {
 
-    //}
     const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
     // const [creationDateAscending, setCreationDateAscending] = useState(false);
     // const [priorityAscending, setPriorityAscending] = useState(false);
