@@ -11,7 +11,7 @@ function MyList(props) {
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const [isNotEmpty, setIsNotEmpty] = useState(false);
 
-    console.log(props.list);
+
     const input = useRef(null);
     const pInput = useRef(null);
 

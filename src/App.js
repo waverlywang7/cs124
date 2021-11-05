@@ -47,7 +47,6 @@ function App(props) {
                 completed: false
             };
             listCollection.doc(newItem.id).set(newItem);
-            console.log(newItem);
     }
 
     function handleDeleteAll() {
