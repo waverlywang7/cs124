@@ -3,16 +3,13 @@ import './MyList.css';
 import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
-import query from "./App.js"
 
-//import {onSnapshot} from "firebase/firebase-firestore";
 
 function MyList(props) {
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const [isNotEmpty, setIsNotEmpty] = useState(false);
-    const [containsCompleted, setContainsCompleted] = useState(false);
 
     console.log(props.list);
     const input = useRef(null);
@@ -89,11 +86,8 @@ function MyList(props) {
     }
 
     function toggleDropdown() {
-        //console.log( document.getElementById("sortButton1").getAttribute("name") + "myDropdown");
         document.getElementById("sortButton1").classList.toggle("hideButton");
-        //console.log( document.getElementById("sortButton2").getAttribute("name") + "myDropdown");
         document.getElementById("sortButton2").classList.toggle("hideButton");
-        //console.log( document.getElementById("sortButton3").getAttribute("name") + "myDropdown");
         document.getElementById("sortButton3").classList.toggle("hideButton");
     }
 
@@ -127,7 +121,7 @@ function MyList(props) {
                         {/*<button className="dropbtn">Priority</button>*/}
 
                         <select name="Priority" ref={pInput} id="priorityInput">
-                            <option value="c" selected>low</option>
+                            <option value="c">low</option>
                             <option value="b">medium</option>
                             <option value="a">high</option>
                         </select>
@@ -149,7 +143,6 @@ function MyList(props) {
 
                     }}> Sort by Creation Date
                     </option>
-
                     <option type="button" name="priority" id="sortButton3" onClick={() => {
                         props.onSort("priority", "asc");
                     }}> Sort by Priority
@@ -176,7 +169,7 @@ function MyList(props) {
                     </button>
                 </div> : null}
             </div>
-            <div> {tasks} </div>
+            <div class = "taskList"> {tasks} </div>
             <br/>
         </div>);
 }

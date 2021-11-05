@@ -2,7 +2,9 @@
     position: absolute;
     left: 0.5cm;
 }
-
+h2{
+    font-size: 24pt;
+}
 body {
     font-family: "Avenir";
     color: White;
@@ -12,11 +14,14 @@ body {
     justify-content: space-evenly;
     flex-start: center;
     padding-left: 24px;
-    font-size: 24pt;
+    font-size: 10pt;
     background-color: #83A1CD;
     align-content: flex-start;
 }
 
+.taskList{
+    margin-top: 10px;
+}
 
 .inputbar {
     display: flex;
@@ -99,7 +104,6 @@ button{
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     float: none;
-    padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;

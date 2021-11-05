@@ -6,8 +6,6 @@ import { useState } from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import './ListItem.js'
 import {useCollection} from "react-firebase-hooks/firestore";
-import {orderByValue} from "react-firebase-hooks/firestore";
-import {query} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
@@ -29,9 +27,7 @@ function App(props) {
     //const query = listCollection;
 
     const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
-    // const [creationDateAscending, setCreationDateAscending] = useState(false);
-    // const [priorityAscending, setPriorityAscending] = useState(false);
-    // const [nameAscending, setNameAscending] = useState(false);
+
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>
@@ -39,7 +35,6 @@ function App(props) {
     }
 
     function handleDeleteListItem(listItemId){
-        // setData(data.filter(listItem => listItem.id !==listItemId))
         listCollection.doc(listItemId).delete();
     }
 
@@ -60,7 +55,6 @@ function App(props) {
         for (let i = 0; i < filterList.length; i ++) {
             handleDeleteListItem(filterList[i].id);
         }
-        // setData(filteredList);
     }
 
     function handleListItemFieldChanged(listItemId, field, value) {
@@ -72,11 +66,6 @@ function App(props) {
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
     }
-        //  setData(data.map(
-        //     listItem => listItem.id !==listItemId
-        //         ? listItem
-        //         : {...listItem, [field]: value},
-        // ))
 
 
     return <div>
