@@ -19,7 +19,12 @@ function MyList(props) {
     const pInput = useRef(null);
 
     function handleAdd() {
-        const newItem = {name: input.current.value, id: generateUniqueID(), completed: false, priority: pInput.current.value}
+        const newItem = {
+            name: input.current.value,
+            id: generateUniqueID(),
+            completed: false,
+            priority: pInput.current.value
+        }
         setNewItem(newItem);
         props.onItemAdded(newItem.name, newItem.priority);
         input.current.value = "";
@@ -84,10 +89,15 @@ function MyList(props) {
     }
 
     function toggleDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
+        //console.log( document.getElementById("sortButton1").getAttribute("name") + "myDropdown");
+        document.getElementById("sortButton1").classList.toggle("hideButton");
+        //console.log( document.getElementById("sortButton2").getAttribute("name") + "myDropdown");
+        document.getElementById("sortButton2").classList.toggle("hideButton");
+        //console.log( document.getElementById("sortButton3").getAttribute("name") + "myDropdown");
+        document.getElementById("sortButton3").classList.toggle("hideButton");
     }
 
-// Close the dropdown if the user clicks outside of it
+    //Close the dropdown if the user clicks outside of it
     window.onclick = function(e) {
         if (!e.target.matches('.sortDropdown')) {
             var myDropdown = document.getElementById("myDropdown");
@@ -97,7 +107,9 @@ function MyList(props) {
         }
     }
     return (
-        <div class = "myList">
+
+        <div class="myList">
+
             <h2> MY LIST </h2>
             {buttonList}
             <div class="inputbar">
@@ -110,37 +122,37 @@ function MyList(props) {
                 </div>
                 }
                 <div id="prioritycontainer">
-                <text id = "priorityText"> Priority </text>
-                <div className="dropdown">
-                    {/*<button className="dropbtn">Priority</button>*/}
+                    <text id="priorityText"> Priority</text>
+                    <div className="dropdown">
+                        {/*<button className="dropbtn">Priority</button>*/}
 
-                    <select name="Priority" ref={pInput} id="priorityInput">
-                        <option value="c" selected>low</option>
-                        <option value="b" >medium</option>
-                        <option value="a" >high</option>
-                    </select>
-                </div>
+                        <select name="Priority" ref={pInput} id="priorityInput">
+                            <option value="c" selected>low</option>
+                            <option value="b">medium</option>
+                            <option value="a">high</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div className="dropdown">
-                <button onClick= "toggleDropdown()" className="sortDropdown">Sort
-                    <i class= "fa fa-caret-down"></i>
+                <button onClick={toggleDropdown} className="sortDropdown">Sort
+                    <i class="fa fa-caret-down"></i>
                 </button>
                 <div id="myDropdown" className="dropdown-content">
                     <option type="button" name="sortbyname" id="sortButton1" onClick={() => {
                         props.onSort("name", "asc");
-                    }}> Name
+                    }}> Sort by Name
                     </option>
 
                     <option type="button" name="sortbycreationdate" id="sortButton2" onClick={() => {
                         props.onSort("creationDate", "asc");
 
-                    }}> Creation Date
+                    }}> Sort by Creation Date
                     </option>
 
                     <option type="button" name="priority" id="sortButton3" onClick={() => {
                         props.onSort("priority", "asc");
-                    }}> Priority
+                    }}> Sort by Priority
                     </option>
                 </div>
             </div>

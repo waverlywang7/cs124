@@ -120,6 +120,10 @@ button{
 /*    text-decoration: none;*/
 /*    display: block;*/
 /*}*/
+.hideButton{
+    display: none;
+}
+
 .show {
     display: block;
 }
