@@ -132,7 +132,7 @@ button{
     display: block;
 }
 /* Change color of dropdown elements on hover */
-.dropdown-content option:hover {background-color: #ddd;}
+.dropdown-content option:hover {background-color: lightblue;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
