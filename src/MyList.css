@@ -30,10 +30,7 @@ body {
     margin: 0 -5px;
 }
 
-.prioritycontainer{
-    display: grid;
-    grid-column: 2;
-}
+
 
 
 #add{

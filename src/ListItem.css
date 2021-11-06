@@ -40,10 +40,12 @@ button{
     background-color: #05386B;
 
 }
-.unselected1 {
 
+
+
+.addTask{
+    padding-right: 100px;
 }
-
 h3 {
     font-size: 12pt;
     letter-spacing: 3px;

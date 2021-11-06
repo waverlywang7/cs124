@@ -15,6 +15,7 @@ function MyList(props) {
     const input = useRef(null);
     const pInput = useRef(null);
 
+
     function handleAdd() {
         const newItem = {
             name: input.current.value,
@@ -70,7 +71,6 @@ function MyList(props) {
         return false;
     }
 
-
     function checkIfOneSelected() {
         let count = 0;
         for (let i = 0; i < props.list.length; i++) {
@@ -92,7 +92,7 @@ function MyList(props) {
     }
 
     //Close the dropdown if the user clicks outside of it
-    window.onclick = function(e) {
+    window.onclick = function (e) {
         if (!e.target.matches('.sortDropdown')) {
             var myDropdown = document.getElementById("myDropdown");
             if (myDropdown.classList.contains('show')) {
@@ -100,6 +100,18 @@ function MyList(props) {
             }
         }
     }
+
+    // function addOnEnter() {
+    // let input2 = document.getElementById("myInput");
+    // console.log("i am here");
+    // input2.addEventListener("keyup", function (event) {
+    //     if (event.keyCode === 13) {
+    //         event.preventDefault();
+    //         document.getElementById("add").click();
+    //     }
+    // });
+    // }
+
     return (
 
         <div class="myList">
@@ -111,14 +123,9 @@ function MyList(props) {
                        onChange={(e) => setIsNotEmpty(checkInput(e.target.value))}
                        placeholder="I need to..."/>
 
-                {isNotEmpty && <div class="addTask">
-                    <button type="button" name="add" id="add" onClick={handleAdd}>Add Task</button>
-                </div>
-                }
-                <div id="prioritycontainer">
+                {isNotEmpty && <div id="prioritycontainer">
                     <text id="priorityText"> Priority</text>
                     <div className="dropdown">
-                        {/*<button className="dropbtn">Priority</button>*/}
 
                         <select name="Priority" ref={pInput} id="priorityInput">
                             <option value="c">low</option>
@@ -127,6 +134,14 @@ function MyList(props) {
                         </select>
                     </div>
                 </div>
+                }
+
+
+                {isNotEmpty && <div class="addTask">
+                    <button type="button" name="add" id="add" onClick={handleAdd}
+                    >Add Task</button>
+                </div>
+                }
             </div>
             <div className="dropdown">
                 <button onClick={toggleDropdown} className="sortDropdown">Sort
@@ -169,9 +184,11 @@ function MyList(props) {
                     </button>
                 </div> : null}
             </div>
-            <div class = "taskList"> {tasks} </div>
+            <div class="taskList"> {tasks} </div>
             <br/>
-        </div>);
+        </div>
+
+    );
 }
 
 export default MyList;
