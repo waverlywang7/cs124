@@ -83,15 +83,6 @@ button{
     align-content: flex-start;
 }
 
-/* Dropdown Button */
-.dropbtn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px;
-    font-size: 10px;
-    border: none;
-}
-
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;

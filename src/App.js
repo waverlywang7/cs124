@@ -25,7 +25,7 @@ function App(props) {
     // create a state
     const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
     //const query = listCollection;
-
+    const[sortSelected, setSortSelected] = useState(false);
     const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
 
     let data = null;
@@ -64,8 +64,13 @@ function App(props) {
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
+        setSortSelected(true);
     }
 
+    function toggleSort(direction) {
+        console.log(order.name);
+        setOrder({sortField: order.sortField, sortDirection: direction});
+    }
 
     return <div>
         {loading ? <div>Loading...</div> :
@@ -75,6 +80,7 @@ function App(props) {
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
                 onSort={handleSort}
+                toggleSort={toggleSort}
         />}
         </div>;
     };

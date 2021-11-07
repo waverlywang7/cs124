@@ -91,6 +91,11 @@ function MyList(props) {
         document.getElementById("sortButton3").classList.toggle("hideButton");
     }
 
+    function toggleOrderDropdown() {
+        document.getElementById("ascending").classList.toggle("hideButton");
+        document.getElementById("descending").classList.toggle("hideButton");
+    }
+
     //Close the dropdown if the user clicks outside of it
     window.onclick = function (e) {
         if (!e.target.matches('.sortDropdown')) {
@@ -163,8 +168,25 @@ function MyList(props) {
                     }}> Sort by Priority
                     </option>
                 </div>
+
+
+                <button onClick={toggleOrderDropdown} className="sortDropdown">Order
+                    <i className="fa fa-caret-down"></i>
+                </button>
+            <div id="togglesort" className="dropdown-content">
+                <option type="button" name="ascending" id="ascending" onClick={() => {
+                    props.toggleSort("asc");
+                }}> Ascending
+                </option>
+
+                <option type="button" name="descending" id="descending" onClick={() => {
+                    props.toggleSort("desc");
+
+                }}> Descending
+                </option>
+
             </div>
-            <br/>
+            </div>
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
