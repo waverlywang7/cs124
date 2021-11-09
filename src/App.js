@@ -7,6 +7,7 @@ import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import './ListItem.js'
 import {useCollection} from "react-firebase-hooks/firestore";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
     authDomain: "hmc-cs124-fa21-labs.firebaseapp.com",
@@ -20,6 +21,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const collectionName = "waverlywang7-listitems";
 const listCollection = db.collection(collectionName);
+
 function App(props) {
     const query = listCollection;
     // create a state
@@ -34,6 +36,7 @@ function App(props) {
             doc.data());
     }
 
+    // uses database to handle deleting an item
     function handleDeleteListItem(listItemId){
         listCollection.doc(listItemId).delete();
     }
