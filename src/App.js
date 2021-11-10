@@ -1,6 +1,7 @@
 import './App.css';
 import firebase from "firebase/compat";
 import MyList from './MyList';
+import MyLists from './MyLists';
 import React from "react";
 import { useState } from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
@@ -89,7 +90,7 @@ function App(props) {
             // <MyLists lists={data}
             //          onListAdded={handleAddList}
             // />
-        <MyList list={data}
+        <MyLists list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}

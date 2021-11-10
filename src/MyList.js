@@ -11,7 +11,6 @@ function MyList(props) {
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const [isNotEmpty, setIsNotEmpty] = useState(false);
 
-
     const input = useRef(null);
     const pInput = useRef(null);
 
@@ -44,8 +43,9 @@ function MyList(props) {
             setShowCompletedItems={setShowCompletedItems}/>
     ))
 
-
+    console.log(props);
     const filteredList = props.list.filter(listItemFilterMap[showCompletedItems]);
+
     const tasks = filteredList
         .map(a =>
             <ListItem
@@ -111,7 +111,7 @@ function MyList(props) {
 
         <div class="myList">
 
-            <h2> MY LIST </h2>
+            <h2> {props.name} </h2>
             {buttonList}
             <div class="inputbar">
                 <input type="text" ref={input} id="myInput"
