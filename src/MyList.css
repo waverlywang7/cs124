@@ -156,7 +156,6 @@
     }
 
     .inputbar {
-        display: flex;
         align-content: flex-start;
         margin-bottom: 0.5cm;
         margin: 0 -5px;
@@ -166,7 +165,9 @@
         background-color: orange;
     }
     #myInput {
-        width: 150px;
+        width: 225px;
+        length: 50px;
+        /*padding-bottom: 20px;*/
     }
 
     button{
@@ -189,6 +190,19 @@
         /*margin-bottom: 0.5cm;*/
 
 
+    }
+
+    .sortDropdown{
+        display: inline-grid;
+        grid-template-columns: auto auto;
+    }
+
+    #sort{
+        grid-column:1;
+    }
+
+    #order{
+        grid-column:2;
     }
 
     #priorityText{

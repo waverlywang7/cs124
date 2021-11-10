@@ -24,7 +24,7 @@ function MyList(props) {
             priority: pInput.current.value
         }
         setNewItem(newItem);
-        props.onItemAdded(newItem.name, newItem.priority);
+        props.onItemAdded(newItem.name, newItem.priority, props.listId);
         input.current.value = "";
         setIsNotEmpty(false);
     }
@@ -106,16 +106,6 @@ function MyList(props) {
         }
     }
 
-    // function addOnEnter() {
-    // let input2 = document.getElementById("myInput");
-    // console.log("i am here");
-    // input2.addEventListener("keyup", function (event) {
-    //     if (event.keyCode === 13) {
-    //         event.preventDefault();
-    //         document.getElementById("add").click();
-    //     }
-    // });
-    // }
 
     return (
 
@@ -149,7 +139,7 @@ function MyList(props) {
                 }
             </div>
             <div className="dropdown">
-                <button onClick={toggleDropdown} className="sortDropdown">Sort
+                <button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div id="myDropdown" className="dropdown-content">
@@ -170,7 +160,7 @@ function MyList(props) {
                 </div>
 
 
-                <button onClick={toggleOrderDropdown} className="sortDropdown">Order
+                <button onClick={toggleOrderDropdown} className="sortDropdown" id="order">Order
                     <i className="fa fa-caret-down"></i>
                 </button>
             <div id="togglesort" className="dropdown-content">

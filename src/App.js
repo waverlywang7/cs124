@@ -19,14 +19,15 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+
 const collectionName = "waverlywang7-listitems";
-const listCollection = db.collection(collectionName);
+const collectionOfLists = db.collection(collectionName);
 
 function App(props) {
-    const query = listCollection;
+    const query = collectionOfLists;
     // create a state
     const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
-    //const query = listCollection;
     const[sortSelected, setSortSelected] = useState(false);
     const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
 
@@ -36,12 +37,20 @@ function App(props) {
             doc.data());
     }
 
-    // uses database to handle deleting an item
-    function handleDeleteListItem(listItemId){
-        listCollection.doc(listItemId).delete();
+    function handleAddList(listName, listId){
+        const newList = {
+            id: listId,
+            name: listName
+        }
+        collectionOfLists.doc(listId).set(newList);
     }
 
-    function handleItemAdded(item, newPriority) {
+    // uses database to handle deleting an item
+    function handleDeleteListItem(listItemId){
+        collectionOfLists.doc(listItemId).delete();
+    }
+
+    function handleItemAdded(item, newPriority, listId) {
         const newItem = {
                 id: generateUniqueID(),
                 priority: newPriority,
@@ -49,7 +58,7 @@ function App(props) {
                 creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
                 completed: false
             };
-            listCollection.doc(newItem.id).set(newItem);
+        collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
     }
 
     function handleDeleteAll() {
@@ -60,7 +69,7 @@ function App(props) {
     }
 
     function handleListItemFieldChanged(listItemId, field, value) {
-        listCollection.doc(listItemId).update({
+        collectionOfLists.doc(listItemId).update({
             [field]: value,
         });
     }
@@ -77,6 +86,9 @@ function App(props) {
 
     return <div>
         {loading ? <div>Loading...</div> :
+            // <MyLists lists={data}
+            //          onListAdded={handleAddList}
+            // />
         <MyList list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
@@ -84,6 +96,7 @@ function App(props) {
                 onDeleteAll={handleDeleteAll}
                 onSort={handleSort}
                 toggleSort={toggleSort}
+                onListAdded={handleAddList}
         />}
         </div>;
     };
