@@ -29,9 +29,9 @@ function App(props) {
     const query = collectionOfLists;
     // create a state
     const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
-    const[sortSelected, setSortSelected] = useState(false);
-    const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
-
+    const [sortSelected, setSortSelected] = useState(false);
+    const [currentList, setCurrentList] = useState("List1");
+    const [value, loading, error] = useCollection(collectionOfLists.doc(currentList).collection("tasks").orderBy(order.sortField, order.sortDirection));
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>
@@ -43,12 +43,13 @@ function App(props) {
             id: listId,
             name: listName
         }
+        setCurrentList(newList.name);
         collectionOfLists.doc(listId).set(newList);
     }
 
     // uses database to handle deleting an item
-    function handleDeleteListItem(listItemId){
-        collectionOfLists.doc(listItemId).delete();
+    function handleDeleteListItem(listId, listItemId){
+        collectionOfLists.doc(listId).collection("tasks").doc(listItemId).delete();
     }
 
     function handleItemAdded(item, newPriority, listId) {
@@ -90,7 +91,7 @@ function App(props) {
             // <MyLists lists={data}
             //          onListAdded={handleAddList}
             // />
-        <MyLists list={data}
+            <MyLists list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}

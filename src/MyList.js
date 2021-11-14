@@ -10,7 +10,7 @@ function MyList(props) {
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const [isNotEmpty, setIsNotEmpty] = useState(false);
-
+    const [inputName, setInputName] = useState("");
     const input = useRef(null);
     const pInput = useRef(null);
 
@@ -181,9 +181,9 @@ function MyList(props) {
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
                         () => {
-                            props.onDeleteListItem(selectedId);
+                            props.onDeleteListItem(props.listId, selectedId);
                             setSelectedId(null);
-                        }}>Delete Task
+                        }}> Delete Task
                     </button>
                 </div> : null
                 }

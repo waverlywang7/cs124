@@ -22,9 +22,13 @@ function MyLists(props) {
     }
 
 
-    function createListOfLists(){
-
-    }
+    const listOfButtons = LoL.map(name => (
+        <button
+            name={name}
+            aria-pressed={props.isSelected}
+            // onClick={}
+        />
+    ))
 
     console.log(props.list);
     const LoL = props.list.map(a =>
