@@ -23,7 +23,8 @@ const collectionName = "waverlywang7-listitems";
 const collectionOfLists = db.collection(collectionName);
 
 function MyLists(props) {
-
+    const [selectedListId, setSelectedListId] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
     const [listName, setListName] = useState("");
     const listInput = useRef(null);
     const [value, loading, error] = useCollection(collectionOfLists);
@@ -65,7 +66,8 @@ function MyLists(props) {
     const listOfButtons = data.map(list => (
         <button
             name={list.name}
-            // aria-pressed={setSelectedId}
+            aria-pressed={(id)=>setSelectedListId(id)}
+
             // onClick={}
         >{list.name}</button>
     ))

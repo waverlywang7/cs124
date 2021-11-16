@@ -25,7 +25,7 @@ const collectionName = "waverlywang7-listitems";
 const collectionOfLists = db.collection(collectionName);
 
 function App(props) {
-    const [selectedListId, setSelectedListId] = useState(0);
+    const [selectedListId, setSelectedListId] = useState(null);
     const query = collectionOfLists;
     // create a state
     const [currentList, setCurrentList] = useState("List1");
@@ -78,7 +78,8 @@ function App(props) {
 
 
     return <div>
-            <MyLists list={data}
+            <MyLists
+                list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
