@@ -30,11 +30,11 @@ function MyList(props) {
     const [inputName, setInputName] = useState("");
     const input = useRef(null);
     const pInput = useRef(null);
-    const [currentList, setCurrentList] = useState("List1");
+    // const [currentList, setCurrentList] = props.listId;
     const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
     const [sortSelected, setSortSelected] = useState(false);
-
-    const [value, loading, error] = useCollection(collectionOfLists.doc(currentList).collection("tasks").orderBy(order.sortField, order.sortDirection));
+    console.log("props.listId" ,props.listId)
+    const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
 
     let data = [];
     if (value !== undefined) {
@@ -99,8 +99,8 @@ function MyList(props) {
     }
 
     function checkIfContainsCompleted() {
-        for (let i = 0; i < props.list.length; i++) {
-            if (props.list[i].completed === true) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].completed === true) {
                 return true;
             }
         }
@@ -108,17 +108,13 @@ function MyList(props) {
     }
 
     function checkIfOneSelected() {
-        let count = 0;
-        for (let i = 0; i < props.list.length; i++) {
-            if (props.list[i].completed === true) {
+        let count = 0; //filter
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].completed === true) {
                 count++;
             }
         }
-        if (count === 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return count == 1;
     }
 
     function toggleDropdown() {
@@ -226,7 +222,7 @@ function MyList(props) {
                 {(!checkIfOneSelected()) && checkIfContainsCompleted() ? <div class="deleteAllButton">
                     <button type="button" id="deleteAll" onClick={
                         () => {
-                            props.onDeleteAll(selectedId);
+                            props.onDeleteAll(selectedId); // Is this what we want?
                         }}>
                         Delete All Completed Tasks
                     </button>

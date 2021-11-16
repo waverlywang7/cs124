@@ -28,8 +28,8 @@ function App(props) {
     const [selectedListId, setSelectedListId] = useState(null);
     const query = collectionOfLists;
     // create a state
-    const [currentList, setCurrentList] = useState("List1");
-    const [value, loading, error] = useCollection(collectionOfLists);
+    // const [currentList, setCurrentList] = useState("List1");
+    const [value, loading, error] = useCollection(collectionOfLists); // let MyList and myLists handle
 
     let data = null;
     if (value !== undefined) {
@@ -42,7 +42,7 @@ function App(props) {
             id: listId,
             name: listName
         }
-        setCurrentList(newList.name);
+        // setCurrentList(newList.name);
         collectionOfLists.doc(listId).set(newList);
     }
 
@@ -78,13 +78,16 @@ function App(props) {
 
 
     return <div>
+        {selectedListId ?  <MyList listId={selectedListId}/> :
             <MyLists
+                setSelectedListId={setSelectedListId}
                 list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
                 onListAdded={handleAddList}/>
+            }
     </div>;
     };
 
