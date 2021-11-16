@@ -40,35 +40,16 @@ function MyLists(props) {
             name: listName,
             id: generateUniqueID()
         }
-
         props.onListAdded(newList.name, newList.id);
         listInput.current.value = "";
     }
 
 
-    //const LoL = data.map(a =>
-    // <MyList list={props.list}
-    //         name={listName}
-    //     onItemAdded={props.onItemAdded}
-    //     onDeleteListItem={props.onDeleteListItem}
-    //     onListItemFieldChanged={props.onListItemFieldChanged}
-    //     onDeleteAll={props.onDeleteAll}
-    //     onSort={props.onSort}
-    //     toggleSort={props.toggleSort}
-    //     onListAdded={props.onListAdded}
-    //     onRowClick={(id) =>
-    //         setSelectedListId(id)}
-    //     // onListItemFieldChanged={props.onListItemFieldChanged}
-    //     listId={a.id === selectedListId}
-    //     key={a.id}
-    //     {...a} />);
 
     const listOfButtons = data.map(list => (
         <button
             name={list.name}
-            onClick={(e)=> props.setSelectedListId(list.id)}
-
-            // onClick={}
+            onClick={(e)=> props.onClickWrapper(list.id, list.name)}
         >{list.name}</button>
     ))
 
@@ -87,9 +68,14 @@ function MyLists(props) {
                     >Create New List
                     </button>
                 </div>
+
+                <div className="deleteList">
+                    <button type="button" name="delete" id="delete" onClick={props.onListDeleted}
+                    >Delete List
+                    </button>
+                </div>
             </div>
             <div className="LoL"> {listOfButtons} </div>
-
         </div>
     }</div>
     );

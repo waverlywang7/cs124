@@ -137,8 +137,7 @@ function MyList(props) {
             }
         }
     }
-
-
+    console.log("props.name", props.name);
     return (
 
         <div class="myList">

@@ -26,7 +26,8 @@ const collectionOfLists = db.collection(collectionName);
 
 function App(props) {
     const [selectedListId, setSelectedListId] = useState(null);
-    const query = collectionOfLists;
+    const [currentListName, setCurrentListName] = useState(null);
+    // const query = collectionOfLists;
     // create a state
     // const [currentList, setCurrentList] = useState("List1");
     const [value, loading, error] = useCollection(collectionOfLists); // let MyList and myLists handle
@@ -36,20 +37,24 @@ function App(props) {
         data = value.docs.map(doc =>
             doc.data());
     }
-
+    //
     function handleAddList(listName, listId){
         const newList = {
             id: listId,
             name: listName
         }
-        // setCurrentList(newList.name);
+        setCurrentListName(listName);
         collectionOfLists.doc(listId).set(newList);
     }
+
+
 
     // uses database to handle deleting an item
     function handleDeleteListItem(listId, listItemId){
         collectionOfLists.doc(listId).collection("tasks").doc(listItemId).delete();
     }
+
+
 
     function handleItemAdded(item, newPriority, listId) {
         const newItem = {
@@ -75,18 +80,33 @@ function App(props) {
         });
     }
 
+    function handleDeleteList(){
+        collectionOfLists.doc(selectedListId).delete();
+    }
+
+    function onClickWrapper(id, name){
+        setSelectedListId(id);
+        setCurrentListName(name);
+    }
+
 
 
     return <div>
-        {selectedListId ?  <MyList listId={selectedListId}/> :
+        {selectedListId ?  <MyList
+                name={currentListName}
+                listId={selectedListId}/> :
             <MyLists
-                setSelectedListId={setSelectedListId}
+                // selectedListId={selectedListId}
+                onClickWrapper={onClickWrapper}
                 list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
-                onListAdded={handleAddList}/>
+                onListAdded={handleAddList}
+                onListDeleted={handleDeleteList}
+            />
+
             }
     </div>;
     };
