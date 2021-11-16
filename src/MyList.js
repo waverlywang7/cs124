@@ -3,7 +3,24 @@ import './MyList.css';
 import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
+import {useCollection} from "react-firebase-hooks/firestore";
+import firebase from "firebase/compat";
 
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
+    authDomain: "hmc-cs124-fa21-labs.firebaseapp.com",
+    projectId: "hmc-cs124-fa21-labs",
+    storageBucket: "hmc-cs124-fa21-labs.appspot.com",
+    messagingSenderId: "949410042946",
+    appId: "1:949410042946:web:0113b139a7e3cd1cc709db"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+
+const collectionName = "waverlywang7-listitems";
+const collectionOfLists = db.collection(collectionName);
 
 function MyList(props) {
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
@@ -13,7 +30,26 @@ function MyList(props) {
     const [inputName, setInputName] = useState("");
     const input = useRef(null);
     const pInput = useRef(null);
+    const [currentList, setCurrentList] = useState("List1");
+    const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
+    const [sortSelected, setSortSelected] = useState(false);
 
+    const [value, loading, error] = useCollection(collectionOfLists.doc(currentList).collection("tasks").orderBy(order.sortField, order.sortDirection));
+
+    let data = null;
+    if (value !== undefined) {
+        data = value.docs.map(doc =>
+            doc.data());
+    }
+
+    function handleSort(name, direction) {
+        setOrder({sortField: name, sortDirection: direction});
+        setSortSelected(true);
+    }
+
+    function toggleSort(direction) {
+        setOrder({sortField: order.sortField, sortDirection: direction});
+    }
 
     function handleAdd() {
         const newItem = {
@@ -144,17 +180,17 @@ function MyList(props) {
                 </button>
                 <div id="myDropdown" className="dropdown-content">
                     <option type="button" name="sortbyname" id="sortButton1" onClick={() => {
-                        props.onSort("name", "asc");
+                        handleSort("name", "asc");
                     }}> Sort by Name
                     </option>
 
                     <option type="button" name="sortbycreationdate" id="sortButton2" onClick={() => {
-                        props.onSort("creationDate", "asc");
+                        handleSort("creationDate", "asc");
 
                     }}> Sort by Creation Date
                     </option>
                     <option type="button" name="priority" id="sortButton3" onClick={() => {
-                        props.onSort("priority", "asc");
+                        handleSort("priority", "asc");
                     }}> Sort by Priority
                     </option>
                 </div>
@@ -165,12 +201,12 @@ function MyList(props) {
                 </button>
             <div id="togglesort" className="dropdown-content">
                 <option type="button" name="ascending" id="ascending" onClick={() => {
-                    props.toggleSort("asc");
+                    toggleSort("asc");
                 }}> Ascending
                 </option>
 
                 <option type="button" name="descending" id="descending" onClick={() => {
-                    props.toggleSort("desc");
+                    toggleSort("desc");
 
                 }}> Descending
                 </option>

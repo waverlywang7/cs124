@@ -19,8 +19,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
+const db = firebase.firestore();  
 
 const collectionName = "waverlywang7-listitems";
 const collectionOfLists = db.collection(collectionName);
@@ -28,10 +27,8 @@ const collectionOfLists = db.collection(collectionName);
 function App(props) {
     const query = collectionOfLists;
     // create a state
-    const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
-    const [sortSelected, setSortSelected] = useState(false);
     const [currentList, setCurrentList] = useState("List1");
-    const [value, loading, error] = useCollection(collectionOfLists.doc(currentList).collection("tasks").orderBy(order.sortField, order.sortDirection));
+    const [value, loading, error] = useCollection(collectionOfLists);
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>
@@ -76,31 +73,16 @@ function App(props) {
         });
     }
 
-    function handleSort(name, direction) {
-        setOrder({sortField: name, sortDirection: direction});
-        setSortSelected(true);
-    }
 
-    function toggleSort(direction) {
-        console.log(order.name);
-        setOrder({sortField: order.sortField, sortDirection: direction});
-    }
 
     return <div>
-        {loading ? <div>Loading...</div> :
-            // <MyLists lists={data}
-            //          onListAdded={handleAddList}
-            // />
             <MyLists list={data}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
-                onSort={handleSort}
-                toggleSort={toggleSort}
-                onListAdded={handleAddList}
-        />}
-        </div>;
+                onListAdded={handleAddList}/>
+    </div>;
     };
 
 export default App;
