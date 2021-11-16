@@ -36,7 +36,7 @@ function MyList(props) {
 
     const [value, loading, error] = useCollection(collectionOfLists.doc(currentList).collection("tasks").orderBy(order.sortField, order.sortDirection));
 
-    let data = null;
+    let data = [];
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
@@ -80,7 +80,7 @@ function MyList(props) {
     ))
 
     console.log(props);
-    const filteredList = props.list.filter(listItemFilterMap[showCompletedItems]);
+    const filteredList = data.filter(listItemFilterMap[showCompletedItems]);
 
     const tasks = filteredList
         .map(a =>

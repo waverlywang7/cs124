@@ -19,16 +19,18 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();  
+const db = firebase.firestore();
 
 const collectionName = "waverlywang7-listitems";
 const collectionOfLists = db.collection(collectionName);
 
 function App(props) {
+    const [selectedListId, setSelectedListId] = useState(0);
     const query = collectionOfLists;
     // create a state
     const [currentList, setCurrentList] = useState("List1");
     const [value, loading, error] = useCollection(collectionOfLists);
+
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>

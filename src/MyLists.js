@@ -23,12 +23,12 @@ const collectionName = "waverlywang7-listitems";
 const collectionOfLists = db.collection(collectionName);
 
 function MyLists(props) {
-    const [selectedListId, setSelectedListId] = useState(0);
+
     const [listName, setListName] = useState("");
     const listInput = useRef(null);
     const [value, loading, error] = useCollection(collectionOfLists);
 
-    let data = null;
+    let data = [];
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
@@ -45,29 +45,29 @@ function MyLists(props) {
     }
 
 
-    const LoL = data.map(a =>
-    <MyList list={props.list}
-            name={listName}
-        onItemAdded={props.onItemAdded}
-        onDeleteListItem={props.onDeleteListItem}
-        onListItemFieldChanged={props.onListItemFieldChanged}
-        onDeleteAll={props.onDeleteAll}
-        onSort={props.onSort}
-        toggleSort={props.toggleSort}
-        onListAdded={props.onListAdded}
-        onRowClick={(id) =>
-            setSelectedListId(id)}
-        // onListItemFieldChanged={props.onListItemFieldChanged}
-        listId={a.id === selectedListId}
-        key={a.id}
-        {...a} />);
+    //const LoL = data.map(a =>
+    // <MyList list={props.list}
+    //         name={listName}
+    //     onItemAdded={props.onItemAdded}
+    //     onDeleteListItem={props.onDeleteListItem}
+    //     onListItemFieldChanged={props.onListItemFieldChanged}
+    //     onDeleteAll={props.onDeleteAll}
+    //     onSort={props.onSort}
+    //     toggleSort={props.toggleSort}
+    //     onListAdded={props.onListAdded}
+    //     onRowClick={(id) =>
+    //         setSelectedListId(id)}
+    //     // onListItemFieldChanged={props.onListItemFieldChanged}
+    //     listId={a.id === selectedListId}
+    //     key={a.id}
+    //     {...a} />);
 
-    const listOfButtons = LoL.map(name => (
+    const listOfButtons = data.map(list => (
         <button
-            name={name}
-            aria-pressed={props.isSelected}
+            name={list.name}
+            // aria-pressed={setSelectedId}
             // onClick={}
-        />
+        >{list.name}</button>
     ))
 
     return (
