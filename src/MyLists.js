@@ -1,6 +1,7 @@
 import ListItem from "./ListItem.js";
 import MyList from "./MyList.js";
 import './MyList.css';
+import './MyLists.css';
 import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
