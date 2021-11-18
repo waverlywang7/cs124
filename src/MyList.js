@@ -35,12 +35,13 @@ function MyList(props) {
     const [sortSelected, setSortSelected] = useState(false);
     console.log("props.listId" ,props.listId)
     const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
-
+    console.log("i am in mylist");
     let data = [];
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
     }
+    console.log("task data", data);
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
@@ -142,7 +143,7 @@ function MyList(props) {
 
         <div class="myList">
             <div className="deleteList">
-                <button type="button" name="delete" id="delete" onClick={props.onListDeleted(props.listId)}
+                <button type="button" name="delete" id="delete" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List
                 </button>
             </div>

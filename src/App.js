@@ -52,7 +52,6 @@ function App(props) {
             id: listId,
             name: listName
         }
-        setCurrentListName(listName);
         collectionOfLists.doc(listId).set(newList);
     }
 
@@ -91,6 +90,8 @@ function App(props) {
     }
 
     function handleDeleteList(listId){
+        console.log("in delete list");
+        console.trace()
         collectionOfLists.doc(listId).delete();
     }
 
@@ -103,7 +104,7 @@ function App(props) {
         setSelectedListId(null);
         setCurrentListName(null);
     }
-
+console.log("selected list id", selectedListId, "LIST NAME", currentListName);
     return <div>
         {selectedListId ? <MyList
                 name={currentListName}
