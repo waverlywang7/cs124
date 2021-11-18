@@ -69,11 +69,7 @@ function MyLists(props) {
                     </button>
                 </div>
 
-                <div className="deleteList">
-                    <button type="button" name="delete" id="delete" onClick={props.onListDeleted}
-                    >Delete List
-                    </button>
-                </div>
+
             </div>
             <div className="LoL"> {listOfButtons} </div>
         </div>

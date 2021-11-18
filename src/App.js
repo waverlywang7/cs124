@@ -36,8 +36,17 @@ function App(props) {
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
+        console.log('data', data);
+        if (selectedListId !== null && (!data.find( function(element) {
+             console.log('element', element); return element.id === selectedListId;
+        } ))) {
+            console.log('didntfind', selectedListId);
+            setSelectedListId(null);
+        } else {
+            console.log('did find', selectedListId);
+        }
     }
-    //
+
     function handleAddList(listName, listId){
         const newList = {
             id: listId,
@@ -74,14 +83,15 @@ function App(props) {
         }
     }
 
-    function handleListItemFieldChanged(listItemId, field, value) {
-        collectionOfLists.doc(listItemId).update({
+    function handleListItemFieldChanged(listId, listItemId, field, value) {
+
+        collectionOfLists.doc(listId).collection("tasks").doc(listItemId).update({
             [field]: value,
         });
     }
 
-    function handleDeleteList(){
-        collectionOfLists.doc(selectedListId).delete();
+    function handleDeleteList(listId){
+        collectionOfLists.doc(listId).delete();
     }
 
     function onClickWrapper(id, name){
@@ -89,22 +99,28 @@ function App(props) {
         setCurrentListName(name);
     }
 
-
+    function returnHome(){
+        setSelectedListId(null);
+        setCurrentListName(null);
+    }
 
     return <div>
-        {selectedListId ?  <MyList
+        {selectedListId ? <MyList
                 name={currentListName}
-                listId={selectedListId}/> :
-            <MyLists
-                // selectedListId={selectedListId}
-                onClickWrapper={onClickWrapper}
-                list={data}
+                listId={selectedListId}
+                returnHome={returnHome}
+                onListDeleted={handleDeleteList}
                 onItemAdded={handleItemAdded}
                 onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
                 onDeleteAll={handleDeleteAll}
+            /> :
+            <MyLists
+                // selectedListId={selectedListId}
+                onClickWrapper={onClickWrapper}
+                list={data}
                 onListAdded={handleAddList}
-                onListDeleted={handleDeleteList}
+
             />
 
             }

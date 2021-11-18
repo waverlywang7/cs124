@@ -129,20 +129,26 @@ function MyList(props) {
     }
 
     //Close the dropdown if the user clicks outside of it
-    window.onclick = function (e) {
-        if (!e.target.matches('.sortDropdown')) {
-            var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
-            }
-        }
-    }
+    // window.onclick = function (e) {
+    //     if (!e.target.matches('.sortDropdown')) {
+    //         var myDropdown = document.getElementById("myDropdown");
+    //         if (myDropdown.classList.contains('show')) {
+    //             myDropdown.classList.remove('show');
+    //         }
+    //     }
+    // }
     console.log("props.name", props.name);
     return (
 
         <div class="myList">
-
+            <div className="deleteList">
+                <button type="button" name="delete" id="delete" onClick={props.onListDeleted(props.listId)}
+                >Delete List
+                </button>
+            </div>
+            <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home </button>
             <h2> {props.name} </h2>
+
             {buttonList}
             <div class="inputbar">
                 <input type="text" ref={input} id="myInput"
@@ -228,6 +234,8 @@ function MyList(props) {
                 </div> : null}
             </div>
             <div class="taskList"> {tasks} </div>
+
+
             <br/>
         </div>
 
