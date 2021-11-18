@@ -192,6 +192,10 @@
 
     }
 
+    .topRowButtons{
+        border: none;
+    }
+
     .sortDropdown{
         display: inline-grid;
         grid-template-columns: auto auto;

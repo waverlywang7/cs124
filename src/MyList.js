@@ -31,9 +31,9 @@ function MyList(props) {
     const input = useRef(null);
     const pInput = useRef(null);
     // const [currentList, setCurrentList] = props.listId;
-    const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
+    const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
-    console.log("props.listId" ,props.listId)
+    console.log("props.listId", props.listId)
     const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
     console.log("i am in mylist");
     let data = [];
@@ -142,12 +142,13 @@ function MyList(props) {
     return (
 
         <div class="myList">
-            <div className="deleteList">
-                <button type="button" name="delete" id="delete" onClick={() => props.onListDeleted(props.listId)}
+            <div className="topRowButtons">
+                <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List
                 </button>
+                <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home</button>
             </div>
-            <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home </button>
+
             <h2> {props.name} </h2>
 
             {buttonList}
@@ -172,7 +173,8 @@ function MyList(props) {
 
                 {isNotEmpty && <div class="addTask">
                     <button type="button" name="add" id="add" onClick={handleAdd}
-                    >Add Task</button>
+                    >Add Task
+                    </button>
                 </div>
                 }
             </div>
@@ -196,24 +198,21 @@ function MyList(props) {
                     }}> Sort by Priority
                     </option>
                 </div>
-
-
                 <button onClick={toggleOrderDropdown} className="sortDropdown" id="order">Order
                     <i className="fa fa-caret-down"></i>
                 </button>
-            <div id="togglesort" className="dropdown-content">
-                <option type="button" name="ascending" id="ascending" onClick={() => {
-                    toggleSort("asc");
-                }}> Ascending
-                </option>
+                <div id="togglesort" className="dropdown-content">
+                    <option type="button" name="ascending" id="ascending" onClick={() => {
+                        toggleSort("asc");
+                    }}> Ascending
+                    </option>
 
-                <option type="button" name="descending" id="descending" onClick={() => {
-                    toggleSort("desc");
+                    <option type="button" name="descending" id="descending" onClick={() => {
+                        toggleSort("desc");
 
-                }}> Descending
-                </option>
-
-            </div>
+                    }}> Descending
+                    </option>
+                </div>
             </div>
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">

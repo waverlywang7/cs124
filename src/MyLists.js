@@ -46,35 +46,34 @@ function MyLists(props) {
     }
 
 
-
     const listOfButtons = data.map(list => (
         <button
             name={list.name}
-            onClick={(e)=> props.onClickWrapper(list.id, list.name)}
+            onClick={(e) => props.setListIdAndName(list.id, list.name)}
         >{list.name}</button>
     ))
 
     return (
-    <div>{loading ? <div>Loading...</div> :
-        <div class="myLists">
-            <h2> MY LISTS </h2>
+        <div>{loading ? <div>Loading...</div> :
+            <div class="myLists">
+                <h2> MY LISTS </h2>
 
-            <div className="inputbar">
-                <input type="text" ref={listInput} id="myListInput"
-                       onChange={(e) => setListName(e.target.value)}
-                       placeholder="Name your list"/>
+                <div className="inputbar">
+                    <input type="text" ref={listInput} id="myListInput"
+                           onChange={(e) => setListName(e.target.value)}
+                           placeholder="Name your list"/>
 
-                <div className="addList">
-                    <button type="button" name="add" id="add" onClick={handleAddList}
-                    >Create New List
-                    </button>
+                    <div className="addList">
+                        <button type="button" name="add" id="add" onClick={handleAddList}
+                        >Create New List
+                        </button>
+                    </div>
+
+
                 </div>
-
-
+                <div className="LoL"> {listOfButtons} </div>
             </div>
-            <div className="LoL"> {listOfButtons} </div>
-        </div>
-    }</div>
+        }</div>
     );
 }
 

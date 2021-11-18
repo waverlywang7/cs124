@@ -3,7 +3,7 @@ import firebase from "firebase/compat";
 import MyList from './MyList';
 import MyLists from './MyLists';
 import React from "react";
-import { useState } from 'react';
+import {useState} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import './ListItem.js'
 import {useCollection} from "react-firebase-hooks/firestore";
@@ -27,9 +27,6 @@ const collectionOfLists = db.collection(collectionName);
 function App(props) {
     const [selectedListId, setSelectedListId] = useState(null);
     const [currentListName, setCurrentListName] = useState(null);
-    // const query = collectionOfLists;
-    // create a state
-    // const [currentList, setCurrentList] = useState("List1");
     const [value, loading, error] = useCollection(collectionOfLists); // let MyList and myLists handle
 
     let data = null;
@@ -37,9 +34,10 @@ function App(props) {
         data = value.docs.map(doc =>
             doc.data());
         console.log('data', data);
-        if (selectedListId !== null && (!data.find( function(element) {
-             console.log('element', element); return element.id === selectedListId;
-        } ))) {
+        if (selectedListId !== null && (!data.find(function (element) {
+            console.log('element', element);
+            return element.id === selectedListId;
+        }))) {
             console.log('didntfind', selectedListId);
             setSelectedListId(null);
         } else {
@@ -47,7 +45,7 @@ function App(props) {
         }
     }
 
-    function handleAddList(listName, listId){
+    function handleAddList(listName, listId) {
         const newList = {
             id: listId,
             name: listName
@@ -56,28 +54,26 @@ function App(props) {
     }
 
 
-
     // uses database to handle deleting an item
-    function handleDeleteListItem(listId, listItemId){
+    function handleDeleteListItem(listId, listItemId) {
         collectionOfLists.doc(listId).collection("tasks").doc(listItemId).delete();
     }
 
 
-
     function handleItemAdded(item, newPriority, listId) {
         const newItem = {
-                id: generateUniqueID(),
-                priority: newPriority,
-                name: item,
-                creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
-                completed: false
-            };
+            id: generateUniqueID(),
+            priority: newPriority,
+            name: item,
+            creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
+            completed: false
+        };
         collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
     }
 
     function handleDeleteAll() {
         let filterList = data.filter(listItem => listItem.completed);
-        for (let i = 0; i < filterList.length; i ++) {
+        for (let i = 0; i < filterList.length; i++) {
             handleDeleteListItem(filterList[i].id);
         }
     }
@@ -89,22 +85,23 @@ function App(props) {
         });
     }
 
-    function handleDeleteList(listId){
+    function handleDeleteList(listId) {
         console.log("in delete list");
         console.trace()
         collectionOfLists.doc(listId).delete();
     }
 
-    function onClickWrapper(id, name){
+    function setListIdAndName(id, name) {
         setSelectedListId(id);
         setCurrentListName(name);
     }
 
-    function returnHome(){
+    function returnHome() {
         setSelectedListId(null);
         setCurrentListName(null);
     }
-console.log("selected list id", selectedListId, "LIST NAME", currentListName);
+
+    console.log("selected list id", selectedListId, "LIST NAME", currentListName);
     return <div>
         {selectedListId ? <MyList
                 name={currentListName}
@@ -118,14 +115,14 @@ console.log("selected list id", selectedListId, "LIST NAME", currentListName);
             /> :
             <MyLists
                 // selectedListId={selectedListId}
-                onClickWrapper={onClickWrapper}
+                setListIdAndName={setListIdAndName}
                 list={data}
                 onListAdded={handleAddList}
 
             />
 
-            }
+        }
     </div>;
-    };
+};
 
 export default App;
