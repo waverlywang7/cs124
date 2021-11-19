@@ -2,3 +2,10 @@
     display: grid;
     width: auto;
 }
+
+#listNameButton{
+    border: none;
+    align-content: start;
+    font-size: 20px;
+    text-align: start;
+}

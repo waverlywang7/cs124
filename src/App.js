@@ -33,15 +33,10 @@ function App(props) {
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
-        console.log('data', data);
         if (selectedListId !== null && (!data.find(function (element) {
-            console.log('element', element);
             return element.id === selectedListId;
         }))) {
-            console.log('didntfind', selectedListId);
             setSelectedListId(null);
-        } else {
-            console.log('did find', selectedListId);
         }
     }
 
@@ -72,22 +67,23 @@ function App(props) {
     }
 
     function handleDeleteAll() {
+        console.log("data", data);
         let filterList = data.filter(listItem => listItem.completed);
+        console.log("filterlist", filterList);
         for (let i = 0; i < filterList.length; i++) {
             handleDeleteListItem(filterList[i].id);
         }
     }
 
     function handleListItemFieldChanged(listId, listItemId, field, value) {
-
+        console.log("field", field);
+        console.log("value", value);
         collectionOfLists.doc(listId).collection("tasks").doc(listItemId).update({
             [field]: value,
         });
     }
 
     function handleDeleteList(listId) {
-        console.log("in delete list");
-        console.trace()
         collectionOfLists.doc(listId).delete();
     }
 
@@ -101,7 +97,6 @@ function App(props) {
         setCurrentListName(null);
     }
 
-    console.log("selected list id", selectedListId, "LIST NAME", currentListName);
     return <div>
         {selectedListId ? <MyList
                 name={currentListName}

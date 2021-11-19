@@ -27,21 +27,19 @@ function MyList(props) {
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const [isNotEmpty, setIsNotEmpty] = useState(false);
-    const [inputName, setInputName] = useState("");
+    // const [inputName, setInputName] = useState("");
     const input = useRef(null);
     const pInput = useRef(null);
-    // const [currentList, setCurrentList] = props.listId;
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
-    console.log("props.listId", props.listId)
+
     const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
-    console.log("i am in mylist");
+
     let data = [];
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
     }
-    console.log("task data", data);
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
@@ -80,12 +78,12 @@ function MyList(props) {
             setShowCompletedItems={setShowCompletedItems}/>
     ))
 
-    console.log(props);
     const filteredList = data.filter(listItemFilterMap[showCompletedItems]);
 
     const tasks = filteredList
         .map(a =>
             <ListItem
+                listId={props.listId}
                 onRowClick={(id) =>
                     setSelectedId(id)}
                 onListItemFieldChanged={props.onListItemFieldChanged}
@@ -100,22 +98,13 @@ function MyList(props) {
     }
 
     function checkIfContainsCompleted() {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].completed === true) {
-                return true;
-            }
-        }
-        return false;
+        data.filter(listItem => listItem.completed);
+        return data.length > 0;
     }
 
     function checkIfOneSelected() {
-        let count = 0; //filter
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].completed === true) {
-                count++;
-            }
-        }
-        return count == 1;
+        data.filter(listItem => listItem.completed);
+        return data.length === 1;
     }
 
     function toggleDropdown() {
@@ -129,16 +118,6 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
-    //Close the dropdown if the user clicks outside of it
-    // window.onclick = function (e) {
-    //     if (!e.target.matches('.sortDropdown')) {
-    //         var myDropdown = document.getElementById("myDropdown");
-    //         if (myDropdown.classList.contains('show')) {
-    //             myDropdown.classList.remove('show');
-    //         }
-    //     }
-    // }
-    console.log("props.name", props.name);
     return (
 
         <div class="myList">
@@ -234,8 +213,6 @@ function MyList(props) {
                 </div> : null}
             </div>
             <div class="taskList"> {tasks} </div>
-
-
             <br/>
         </div>
 
