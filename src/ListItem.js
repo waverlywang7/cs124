@@ -10,11 +10,7 @@ function ListItem(props) {
     }
 
     function checkifSelected(level) {
-        if (level === props.priority) {
-            return true;
-        } else {
-            return false;
-        }
+        return level === props.priority;
     }
 
     return (

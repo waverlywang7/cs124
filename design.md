@@ -7,30 +7,30 @@ ALTERNATIVE DESIGNS
 
 **Alternate design 1**
 
-![](Huncompletedtasksbefore.png)
+![](src/Huncompletedtasksbefore.png)
 
 _Above is the first draft of our design from Lab1. We realized that this design was too small for 320x640  screen. The text and user interface was tiny on a phone. We were initially going to only have a button that said “Delete Completed Items” that would delete all completed items. It would only show up whenever there would be a completed item. Later, we realized we would want there to be an ability to delete either incomplete or completed items as people might want to trash either. We also didn't delete individual task functionality._
 
 
 **Alternate Design 2**
-![](AlternateDesign.png)
+![](src/AlternateDesign.png)
 
 Here was a rough design for our app later. We have the delete task. We expanded the text and made the buttons bigger. We decided to have the user only be able to delete a list item once they selected the task. The elements are still close together and we want to spread them out more. We also chose to have nicer colors rather than the white and blue.
 
 **Alternate Design 3**
 
 **Fig 1a**
-![](EmptyList.png)
+![](src/EmptyList.png)
 _We increased the font and buttons so it was easier to touch. We also separated the buttons out so it’s not so visually cluttered._
 
 
 **Fig 1b.**
-![](EmptyListIntermediate.png)
+![](src/EmptyListIntermediate.png)
 _how the user would type into the input box to put in the task. They would click the “I need to” input box and type into the box. Then, press “Add”._
 
 
 **Fig. 1c**
-![](eatlunchthree.png)
+![](src/eatlunchthree.png)
 
 Fig. 1c shows how the interface will look after the item is put in the list. We let the user be able to edit their elements at all times.
 
@@ -50,50 +50,50 @@ We made the delete task button so it only shows up when you select a task. The t
 Here is what our final design looks like.
 
 **fig. 1** [lab 3]
-![](lab3fig1.png)
+![](src/lab3fig1.png)
 **fig. 2** [lab 3]
-![](lab3fig2.png)
+![](src/lab3fig2.png)
 
 One feature we changed from alternate design 4 was “Delete all completed buttons'. Before our changes, it would appear even when there were no completed items. Now when there is only one task that is completed, the “Delete Task” button will appear and the “Delete all completed task” button will be hidden. Only when there is more than one task completed will the “Delete all completed task” button appear. We also added a feature where you can sort by different categories. The last feature we added was a priority dropdown, which allows the user to rank their task in priority before adding their task (and changing it afterwards). This is useful because the user can then click our “Sort by Priority” button and have their most pressing tasks be at the top of the screen. Another important change we made, that the user may not notice immediately, is that we implemented the app’s functionality with firebase rather than states. This allowed us to implement sorting easily and, most importantly, save the contents of the todo list upon reload or when closing and revisiting the app later.
 We also added a feature on our app that lets you sort ascending or descending order.
 
 **fig. 3** [lab 3]
-![](lab3fig3.png)
+![](src/lab3fig3.png)
 
 
 Above is a picture of how we let the user set priority of a task next to the input bar. You click the arrow on the priority dropdown in order to change the priority level from low to medium or high.
 
 **fig. 3a** [lab 3]
-![](settingpriorityforlistitem.png)
+![](src/settingpriorityforlistitem.png)
 
 
 Above is how you would edit the individual priority of each task.
 We also added a feature for sorting by creation date descending (oldest to youngest), name of task ascending, and priority descending.
 
 **fig. 4** [lab 3]
-![](lab3fig4.png)
+![](src/lab3fig4.png)
 Here is what it would look like before sorting by creation date. Our app actually puts in items oldest to youngest. But this image shows a case where you would click sort by priority and the list would be sorted differently.
 
 **fig. 5** [lab 3]
-![](lab3fig5.png)
+![](src/lab3fig5.png)
 	
 Here is what it would look like after sorting by creation date oldest to youngest. We highlighted “Creation by Creation Date” in blue so you know which one you pressed.
 
 **fig. 6** [lab 3]
-![](lab3fig6.png)
+![](src/lab3fig6.png)
 
 Here is what it looks like before sorting by name.
 
 **fig. 7** [lab 3]
-![](lab3fig7.png)
+![](src/lab3fig7.png)
 After clicking sort by name, it sorts alphabetically.
 
 **fig. 8** [lab 3]
-![](lab3fig8.png)
+![](src/lab3fig8.png)
 Here is what it looks like before sorting by priority.
 
 **fig. 9** [lab 3]
-![](lab3fig9.png) 
+![](src/lab3fig9.png) 
 And after sorting by priority.
 
 For style changes, we decided to go with a blue screen since the dark purple was hard to read. We also made the tasks smaller so it was easier to read. We also made the buttons smaller and clustered together so they were associated together. Before, they were not aligned and took up the whole screen so you couldn’t view the tasks unless you were scrolling.
@@ -104,41 +104,41 @@ For style changes, we decided to go with a blue screen since the dark purple was
 * **TASK:** In a empty list, create an item named “Buy new John Grisham Book”
 
 **Fig 2a** [lab 2]
-![](Fig2a.png) 
+![](src/Fig2a.png) 
 
 _Fig 2a shows what the interface looks like when it’s empty. As you can see, we increased the font and buttons so it was easier to use. Notice “Add” button doesn’t show so you can’t add empty items._
 
 **Fig 2b**[lab 2]
-![](Fig2b.png) 
+![](src/Fig2b.png) 
 
 _Fig 2b how the user would type into the input box to put in the task. They would click the “I need to” input box and type into the box. Then, press “Add”._
 
 **Fig 2c** [lab 2]
-![](Fig2c.png) 
+![](src/Fig2c.png) 
 _Fig. 2c shows how the interface will look after the item is put in the list. We let the user be able to edit their elements at all times. Notice how the input bar is now blank so that the user can write their next task without backspacing to write their next task._
 
 * **TASK:** In a non-empty list, create an item named “eat lunch”
 
 **Fig 3a.** [lab 2]
-![](Fig3a.png)
+![](src/Fig3a.png)
 _Fig 3a shows what the interface looks like when it’s a non-empty list._
 
 **Fig 3b** [lab 2]
-![](fig3b.png) 
+![](src/fig3b.png) 
 _Fig. 3b Shows what typing in eat lunch looks like._
 
 **Fig 3c** [lab 2]
-![](Fig3c.png) 
+![](src/Fig3c.png) 
 _Fig 3c. shows how the added task is put to the bottom of the list. This will help the viewer see their oldest to do list items first so they are encouraged to get older to do list items done._
 
 * **TASK:** Mark the Item named “Call Mom” Completed
   **Fig. lab34a**[lab 3]
-* ![](lab3fig4a.png) 
+* ![](src/lab3fig4a.png) 
   _Fig. 4a shows what it looks like before marking the “call mom” item
   Completed. Note how the “delete all completed tasks” button isn’t showing.
 
 **Fig. lab34b** [lab 3]
-![](lab3fig4b.png)
+![](src/lab3fig4b.png)
 _4b shows what it looks like after marking the “Call Mom” Completed. Notice how once you click the checkmark, the “Delete Task” button is showing. Notice the “Delete All completed tasks” button isn’t showing. When you check only one box, the “Delete Task” button will show up. If you check more than one box, the “delete all” button will show.
 
 
@@ -146,26 +146,26 @@ _4b shows what it looks like after marking the “Call Mom” Completed. Notice 
 * **TASK:** Rename the item “Text John” to “Text John about Bank Statements”
 
 **Fig. 5a** [lab 2]
-![](Fig5a.png)
+![](src/Fig5a.png)
 _Fig. 5a what it looks like when there is a “Text John” item in the list._
 
 **Fig. 5b** [lab 2]
-![](Fig5b.png)
+![](src/Fig5b.png)
 _Fig 5b shows what it looks like when you are in the process of editing “Text John about Bank Statements”.
 The user would click on the “Text John” element and type in their edit. We made all the task elements editable at all times._
 
 **Fig. 5c** [lab 2]
-![](Fig5c.png)
+![](src/Fig5c.png)
 _Fig. 5c shows what it looks like after the user has finished editing their task._
 
 * **TASK:** Show only uncompleted items
 
 **Fig. 6a** [lab 3]
-![](lab3fig6a.png)
+![](src/lab3fig6a.png)
 _Fig. 6a shows what it looks like when there is a variety of completed and uncompleted elements. Notice that the "My List" title is no longer visible; that is because we have scrolled down in the page in order to view all of the list items._
 
 **Fig. 6b** [lab 3]
-![](lab3fig6b.png)
+![](src/lab3fig6b.png)
 _The user would click on the “Show Uncompleted” button, and then the button would be highlighted so the user know what filter is on. The elements that are uncompleted are not showing now. The other tasks are still accessible by clicking “Show Completed” and “Show All”. “Show Completed” will show only completed tasks and hide “Uncompleted Tasks”. “Show All” will let you see both incomplete and completed tasks._
 
 * **TASK:** Delete all completed items.

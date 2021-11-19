@@ -40,18 +40,14 @@ function App(props) {
         }
     }
 
+
     function handleAddList(listName, listId) {
         const newList = {
             id: listId,
             name: listName
         }
         collectionOfLists.doc(listId).set(newList);
-    }
 
-
-    // uses database to handle deleting an item
-    function handleDeleteListItem(listId, listItemId) {
-        collectionOfLists.doc(listId).collection("tasks").doc(listItemId).delete();
     }
 
 
@@ -63,17 +59,12 @@ function App(props) {
             creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
             completed: false
         };
+
+        console.log("add item", newItem);
         collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
     }
 
-    function handleDeleteAll() {
-        console.log("data", data);
-        let filterList = data.filter(listItem => listItem.completed);
-        console.log("filterlist", filterList);
-        for (let i = 0; i < filterList.length; i++) {
-            handleDeleteListItem(filterList[i].id);
-        }
-    }
+
 
     function handleListItemFieldChanged(listId, listItemId, field, value) {
         console.log("field", field);
@@ -104,9 +95,9 @@ function App(props) {
                 returnHome={returnHome}
                 onListDeleted={handleDeleteList}
                 onItemAdded={handleItemAdded}
-                onDeleteListItem={handleDeleteListItem}
+                // onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
-                onDeleteAll={handleDeleteAll}
+                // onDeleteAll={handleDeleteAll}
             /> :
             <MyLists
                 // selectedListId={selectedListId}

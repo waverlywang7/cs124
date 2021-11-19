@@ -26,13 +26,13 @@ function MyList(props) {
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
-    const [isNotEmpty, setIsNotEmpty] = useState(false);
+
     // const [inputName, setInputName] = useState("");
-    const input = useRef(null);
-    const pInput = useRef(null);
+    const input = useState(null);
+    const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
-
+    const [inputNotEmpty, setInputNotEmpty] = useState(false);
     const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
 
     let data = [];
@@ -46,8 +46,23 @@ function MyList(props) {
         setSortSelected(true);
     }
 
-    function toggleSort(direction) {
+    function handleSortDirection(direction) {
         setOrder({sortField: order.sortField, sortDirection: direction});
+    }
+
+    // uses database to handle deleting an item
+    function handleDeleteListItem(listId, listItemId) {
+        collectionOfLists.doc(listId).collection("tasks").doc(listItemId).delete();
+    }
+
+    function handleDeleteAll() {
+        console.log("data", data);
+        const completedItems = data.filter(listItem => listItem.completed);
+
+        console.log("completedItems", completedItems);
+        for (let i = 0; i < completedItems.length; i++) {
+            handleDeleteListItem(props.listId, completedItems[i].id);
+        }
     }
 
     function handleAdd() {
@@ -60,7 +75,7 @@ function MyList(props) {
         setNewItem(newItem);
         props.onItemAdded(newItem.name, newItem.priority, props.listId);
         input.current.value = "";
-        setIsNotEmpty(false);
+        setInputNotEmpty(false);
     }
 
     const listItemFilterMap = {
@@ -98,13 +113,13 @@ function MyList(props) {
     }
 
     function checkIfContainsCompleted() {
-        data.filter(listItem => listItem.completed);
-        return data.length > 0;
+        const completedItems = data.filter(listItem => listItem.completed);
+        return completedItems.length > 0;
     }
 
     function checkIfOneSelected() {
-        data.filter(listItem => listItem.completed);
-        return data.length === 1;
+        const completedItems = data.filter(listItem => listItem.completed);
+        return completedItems.length === 1;
     }
 
     function toggleDropdown() {
@@ -133,10 +148,10 @@ function MyList(props) {
             {buttonList}
             <div class="inputbar">
                 <input type="text" ref={input} id="myInput"
-                       onChange={(e) => setIsNotEmpty(checkInput(e.target.value))}
+                       onChange={(e) => setInputNotEmpty(checkInput(e.target.value))}
                        placeholder="I need to..."/>
 
-                {isNotEmpty && <div id="prioritycontainer">
+                {inputNotEmpty && <div id="prioritycontainer">
                     <text id="priorityText"> Priority</text>
                     <div className="dropdown">
 
@@ -150,7 +165,7 @@ function MyList(props) {
                 }
 
 
-                {isNotEmpty && <div class="addTask">
+                {inputNotEmpty && <div class="addTask">
                     <button type="button" name="add" id="add" onClick={handleAdd}
                     >Add Task
                     </button>
@@ -182,12 +197,12 @@ function MyList(props) {
                 </button>
                 <div id="togglesort" className="dropdown-content">
                     <option type="button" name="ascending" id="ascending" onClick={() => {
-                        toggleSort("asc");
+                        handleSortDirection("asc");
                     }}> Ascending
                     </option>
 
                     <option type="button" name="descending" id="descending" onClick={() => {
-                        toggleSort("desc");
+                        handleSortDirection("desc");
 
                     }}> Descending
                     </option>
@@ -197,7 +212,7 @@ function MyList(props) {
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
                         () => {
-                            props.onDeleteListItem(props.listId, selectedId);
+                            handleDeleteListItem(props.listId, selectedId);
                             setSelectedId(null);
                         }}> Delete Task
                     </button>
@@ -206,7 +221,7 @@ function MyList(props) {
                 {(!checkIfOneSelected()) && checkIfContainsCompleted() ? <div class="deleteAllButton">
                     <button type="button" id="deleteAll" onClick={
                         () => {
-                            props.onDeleteAll(selectedId); // Is this what we want?
+                            handleDeleteAll();
                         }}>
                         Delete All Completed Tasks
                     </button>
