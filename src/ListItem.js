@@ -36,7 +36,7 @@ function ListItem(props) {
                     <select name="Priority"
                             id="priorityInput"
                             onChange={(e) => {
-                                props.onListItemFieldChanged(props.id, "priority", e.target.value);
+                                props.onListItemFieldChanged(props.listId, props.id, "priority", e.target.value);
                             }}>
                         <option value="c" id="low" selected={checkifSelected("c")}>low</option>
 

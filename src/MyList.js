@@ -34,7 +34,7 @@ function MyList(props) {
     const [sortSelected, setSortSelected] = useState(false);
     const [inputNotEmpty, setInputNotEmpty] = useState(false);
     const [value, loading, error] = useCollection(collectionOfLists.doc(props.listId).collection("tasks").orderBy(order.sortField, order.sortDirection));
-
+    const [directionString, setDirectionString] = useState("Descending");
     let data = [];
     if (value !== undefined) {
         data = value.docs.map(doc =>
@@ -44,10 +44,6 @@ function MyList(props) {
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
         setSortSelected(true);
-    }
-
-    function handleSortDirection(direction) {
-        setOrder({sortField: order.sortField, sortDirection: direction});
     }
 
     // uses database to handle deleting an item
@@ -133,6 +129,17 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
+
+    function toggle0rder(){
+        if (order.sortDirection === "asc"){
+            setOrder({sortField: order.sortField, sortDirection: "desc"});
+            setDirectionString("Descending");
+        } else {
+            setOrder({sortField: order.sortField, sortDirection: "asc"});
+            setDirectionString("Ascending");
+        }
+    }
+
     return (
 
         <div class="myList">
@@ -172,42 +179,35 @@ function MyList(props) {
                 </div>
                 }
             </div>
-            <div className="dropdown">
-                <button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div id="myDropdown" className="dropdown-content">
-                    <option type="button" name="sortbyname" id="sortButton1" onClick={() => {
+
+            <div className="itemDropdown">
+                {/*<button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort*/}
+                {/*    <i class="fa fa-caret-down"></i>*/}
+                {/*</button>*/}
+                <select name="sortdrop"
+                        id="sort"
+                        >Sort</select>
+                {/*<div id="myDropdown" className="dropdown-content">*/}
+                    <option value="name" name="sortbyname" id="sortButton1" onClick={() => {
                         handleSort("name", "asc");
                     }}> Sort by Name
                     </option>
 
-                    <option type="button" name="sortbycreationdate" id="sortButton2" onClick={() => {
+                    <option value="creationdate" name="sortbycreationdate" id="sortButton2" onClick={() => {
                         handleSort("creationDate", "asc");
 
                     }}> Sort by Creation Date
                     </option>
-                    <option type="button" name="priority" id="sortButton3" onClick={() => {
+                    <option value="priority" name="sortbypriority" id="sortButton3" onClick={() => {
                         handleSort("priority", "asc");
                     }}> Sort by Priority
                     </option>
-                </div>
-                <button onClick={toggleOrderDropdown} className="sortDropdown" id="order">Order
-                    <i className="fa fa-caret-down"></i>
-                </button>
-                <div id="togglesort" className="dropdown-content">
-                    <option type="button" name="ascending" id="ascending" onClick={() => {
-                        handleSortDirection("asc");
-                    }}> Ascending
-                    </option>
+                {/*</div>*/}
 
-                    <option type="button" name="descending" id="descending" onClick={() => {
-                        handleSortDirection("desc");
 
-                    }}> Descending
-                    </option>
-                </div>
             </div>
+            <button onClick ={toggle0rder} id="order" >{directionString}</button>
+
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
