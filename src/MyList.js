@@ -189,7 +189,7 @@ function MyList(props) {
                         <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date</label>
             </div>
 
-            <button onClick ={toggle0rder} id="order" >{directionString}</button>
+            <button class= "direction" onClick ={toggle0rder} id="order" >{directionString}</button>
 
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
