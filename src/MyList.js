@@ -180,39 +180,15 @@ function MyList(props) {
                 }
             </div>
 
-            <div className="itemDropdown">
-                <input type="radio" id="html" name="fav_language" value="HTML" onClick={() => handleSort("priority", "asc")}/>Sort By Priority
-                <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {handleSort("name", "asc")}}/>Sort By Name
-                <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date
-
+            <div className="sortRadio">
+                <label class = "radio-inline">
+                <input type="radio" id="html" name="fav_language" value="HTML" onClick={() => handleSort("priority", "asc")}/>Sort By Priority</label>
+                <label className="radio-inline">
+                <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {handleSort("name", "asc")}}/>Sort By Name</label>
+                    <label className="radio-inline">
+                        <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date</label>
             </div>
 
-            {/*<div className="itemDropdown">*/}
-            {/*    /!*<button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort*!/*/}
-            {/*    /!*    <i class="fa fa-caret-down"></i>*!/*/}
-            {/*    /!*</button>*!/*/}
-            {/*    <select name="sortdrop"*/}
-            {/*            id="sort"*/}
-            {/*            >Sort</select>*/}
-            {/*    /!*<div id="myDropdown" className="dropdown-content">*!/*/}
-            {/*        <option value="name" name="sortbyname" id="sortButton1" onClick={() => {*/}
-            {/*            handleSort("name", "asc");*/}
-            {/*        }}> Sort by Name*/}
-            {/*        </option>*/}
-
-            {/*        <option value="creationdate" name="sortbycreationdate" id="sortButton2" onClick={() => {*/}
-            {/*            handleSort("creationDate", "asc");*/}
-
-            {/*        }}> Sort by Creation Date*/}
-            {/*        </option>*/}
-            {/*        <option value="priority" name="sortbypriority" id="sortButton3" onClick={() => {*/}
-            {/*            handleSort("priority", "asc");*/}
-            {/*        }}> Sort by Priority*/}
-            {/*        </option>*/}
-            {/*    */}
-
-
-            {/*</div>*/}
             <button onClick ={toggle0rder} id="order" >{directionString}</button>
 
             <div class="deleteButtons">
