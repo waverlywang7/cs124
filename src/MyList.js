@@ -181,21 +181,10 @@ function MyList(props) {
             </div>
 
             <div className="itemDropdown">
-                <p>Sort by: </p>
-                <select name="Priority"
-                        id="priorityInput">
-                    <option value="name" id="sortButton1" onChange={() => {
-                        handleSort("name", "asc");
-                    }}> Name </option>
+                <input type="radio" id="html" name="fav_language" value="HTML" onClick={() => handleSort("priority", "asc")}/>Sort By Priority
+                <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {handleSort("name", "asc")}}/>Sort By Name
+                <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date
 
-                    <option value="creationdate" id="sortButton2" onChange={() => {
-                        handleSort("creationDate", "asc");
-
-                    }}> Creation Date </option>
-
-                    <option value="priority" id="sortButton3" onChange={() => {
-                        handleSort("priority", "asc");}}> Priority </option>
-                </select>
             </div>
 
             {/*<div className="itemDropdown">*/}
