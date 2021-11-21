@@ -181,31 +181,49 @@ function MyList(props) {
             </div>
 
             <div className="itemDropdown">
-                {/*<button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort*/}
-                {/*    <i class="fa fa-caret-down"></i>*/}
-                {/*</button>*/}
-                <select name="sortdrop"
-                        id="sort"
-                        >Sort</select>
-                {/*<div id="myDropdown" className="dropdown-content">*/}
-                    <option value="name" name="sortbyname" id="sortButton1" onClick={() => {
+                <p>Sort by: </p>
+                <select name="Priority"
+                        id="priorityInput">
+                    <option value="name" id="sortButton1" onChange={() => {
                         handleSort("name", "asc");
-                    }}> Sort by Name
-                    </option>
+                    }}> Name </option>
 
-                    <option value="creationdate" name="sortbycreationdate" id="sortButton2" onClick={() => {
+                    <option value="creationdate" id="sortButton2" onChange={() => {
                         handleSort("creationDate", "asc");
 
-                    }}> Sort by Creation Date
-                    </option>
-                    <option value="priority" name="sortbypriority" id="sortButton3" onClick={() => {
-                        handleSort("priority", "asc");
-                    }}> Sort by Priority
-                    </option>
-                {/*</div>*/}
+                    }}> Creation Date </option>
 
-
+                    <option value="priority" id="sortButton3" onChange={() => {
+                        handleSort("priority", "asc");}}> Priority </option>
+                </select>
             </div>
+
+            {/*<div className="itemDropdown">*/}
+            {/*    /!*<button onClick={toggleDropdown} className="sortDropdown" id="sort">Sort*!/*/}
+            {/*    /!*    <i class="fa fa-caret-down"></i>*!/*/}
+            {/*    /!*</button>*!/*/}
+            {/*    <select name="sortdrop"*/}
+            {/*            id="sort"*/}
+            {/*            >Sort</select>*/}
+            {/*    /!*<div id="myDropdown" className="dropdown-content">*!/*/}
+            {/*        <option value="name" name="sortbyname" id="sortButton1" onClick={() => {*/}
+            {/*            handleSort("name", "asc");*/}
+            {/*        }}> Sort by Name*/}
+            {/*        </option>*/}
+
+            {/*        <option value="creationdate" name="sortbycreationdate" id="sortButton2" onClick={() => {*/}
+            {/*            handleSort("creationDate", "asc");*/}
+
+            {/*        }}> Sort by Creation Date*/}
+            {/*        </option>*/}
+            {/*        <option value="priority" name="sortbypriority" id="sortButton3" onClick={() => {*/}
+            {/*            handleSort("priority", "asc");*/}
+            {/*        }}> Sort by Priority*/}
+            {/*        </option>*/}
+            {/*    */}
+
+
+            {/*</div>*/}
             <button onClick ={toggle0rder} id="order" >{directionString}</button>
 
             <div class="deleteButtons">
