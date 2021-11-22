@@ -1,9 +1,8 @@
 /*for mobile landscape */
- @media screen and (max-height: 360px) and (max-width: 640px) {
+ @media screen and (orientation: landscape) and (max-height: 360px) and (max-width: 640px) {
      .myList{
          position: absolute;
          left: 0.5cm;
-         background-color: red;
      }
      h2{
          font-size: 24pt;
