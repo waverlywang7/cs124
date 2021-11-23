@@ -149,8 +149,8 @@ function MyList(props) {
                 </button>
                 <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home</button>
             </div>
-
-            <h2> {props.name} </h2>
+            <div role="group" alt="poopy"></div>
+            <h2 id ="h2" role="heading" aria-level= "1" aria-label={props.name}> {props.name} </h2>
 
             {buttonList}
             <div class="inputbar">
@@ -160,7 +160,8 @@ function MyList(props) {
 
                 {inputNotEmpty && <div id="prioritycontainer">
                     <text id="priorityText"> Priority</text>
-                    <div className="dropdown">
+                    <div className="dropdown"
+                         aria-label = {' You are on the priority dropdown. You can choose low, medium or high' }>
 
                         <select name="Priority" ref={pInput} id="priorityInput">
                             <option value="c">low</option>
@@ -189,8 +190,8 @@ function MyList(props) {
                         <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date</label>
             </div>
 
-            <button class= "direction" onClick ={toggle0rder} id="order" >{directionString}</button>
-
+            <button class= "direction" onClick ={toggle0rder} id="order" aria-label={'Press this to Order by'+ directionString + 'You can toggle between ascending and descending'}>{directionString}</button>
+            <br />
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={

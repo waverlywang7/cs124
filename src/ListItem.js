@@ -23,7 +23,9 @@ function ListItem(props) {
         >
             <div class="container2">
                 <input
+                    className="listiteminput"
                     type="checkbox"
+                    aria-label= {'You have selected ' + props.name}
                     onChange={(e) => {
                         props.onListItemFieldChanged(props.listId, props.id, "completed", e.target.checked);
                     }
@@ -31,8 +33,9 @@ function ListItem(props) {
                     id={props.id}
                     checked={props.completed}
                 />
-                <ListItemField field="name" {...props}/>
-                <div className="itemDropdown">
+               <div className="listitemfield"> <ListItemField field="name" {...props}/></div>
+                <div className="itemDropdown"
+                     aria-label= {'priority. You are on the priority dropdown for ' + props.name + ' You can choose low, medium or high priority'}>
                     <select name="Priority"
                             id="priorityInput"
                             onChange={(e) => {
