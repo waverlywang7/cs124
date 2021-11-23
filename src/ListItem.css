@@ -106,10 +106,6 @@
         margin: 0 10px;
     }
 
-    .listitemfield {
-        /*width: auto;*/
-        background-color: blue;
-    }
 
     input[type=text] {
         width: 150px;
