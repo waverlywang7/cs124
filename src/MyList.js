@@ -26,8 +26,6 @@ function MyList(props) {
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
-
-    // const [inputName, setInputName] = useState("");
     const input = useState(null);
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});

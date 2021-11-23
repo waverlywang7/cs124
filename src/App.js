@@ -64,8 +64,6 @@ function App(props) {
         collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
     }
 
-
-
     function handleListItemFieldChanged(listId, listItemId, field, value) {
         console.log("field", field);
         console.log("value", value);
@@ -95,18 +93,13 @@ function App(props) {
                 returnHome={returnHome}
                 onListDeleted={handleDeleteList}
                 onItemAdded={handleItemAdded}
-                // onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
-                // onDeleteAll={handleDeleteAll}
             /> :
             <MyLists
-                // selectedListId={selectedListId}
                 setListIdAndName={setListIdAndName}
                 list={data}
                 onListAdded={handleAddList}
-
             />
-
         }
     </div>;
 };
