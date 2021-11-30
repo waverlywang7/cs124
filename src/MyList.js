@@ -7,22 +7,12 @@ import {useCollection} from "react-firebase-hooks/firestore";
 import firebase from "firebase/compat";
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
-    authDomain: "hmc-cs124-fa21-labs.firebaseapp.com",
-    projectId: "hmc-cs124-fa21-labs",
-    storageBucket: "hmc-cs124-fa21-labs.appspot.com",
-    messagingSenderId: "949410042946",
-    appId: "1:949410042946:web:0113b139a7e3cd1cc709db"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
 
 const collectionName = "waverlywang7-listitems";
-const collectionOfLists = db.collection(collectionName);
+
 
 function MyList(props) {
+    const collectionOfLists = props.db.collection(collectionName);
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
