@@ -51,7 +51,7 @@ function App(props) {
     } else {
         return <>
             {error && <p>Error App: {error.message}</p>}
-            {/*//TODO: HAVE THESE SHOW UP???*/}
+            {/*//TODO: HAVE THESE SHOW UP??? THese used to be tabs. Maybe just make them paragrpahs*/}
             <button>  <SignIn key="Sign In"/></button>
             <button>    <SignUp key="Sign Up"/> </button>
 
@@ -78,7 +78,7 @@ function SignIn() {
     }
     return <div>
         {error && <p>"Error logging in: " {error.message}</p>}
-        {/*//NOTE: i added these but maybe we should have these only show up once you click sign in?*/}
+        {/*//NOTE: i added these but maybe we should have these a little separate from the Google login... or only show up once you click sign in?*/}
         <input type="text" id="myInput"
                placeholder="Email"/>
         <input type="text" id="myInput"
