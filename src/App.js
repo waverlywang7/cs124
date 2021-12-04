@@ -4,6 +4,7 @@ import MyList from './MyList';
 import MyLists from './MyLists';
 import React from "react";
 import {useState} from 'react';
+import TabList from './TabList';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import './ListItem.js'
 import {useCollection} from "react-firebase-hooks/firestore";
@@ -51,9 +52,10 @@ function App(props) {
     } else {
         return <>
             {error && <p>Error App: {error.message}</p>}
-            {/*//TODO: HAVE THESE SHOW UP??? THese used to be tabs. Maybe just make them paragrpahs*/}
-            <button>  <SignIn key="Sign In"/></button>
-            <button>    <SignUp key="Sign Up"/> </button>
+            <TabList>
+            <SignIn key="Sign In"/>
+            <SignUp key="Sign Up"/>
+            </TabList>
 
         </>
     }
