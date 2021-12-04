@@ -29,7 +29,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-const collectionName = "waverlywang7-listitems";
+const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 function App(props) {
 
@@ -51,10 +51,10 @@ function App(props) {
     } else {
         return <>
             {error && <p>Error App: {error.message}</p>}
-            <button>
-                <SignIn key="Sign In"/>
-                <SignUp key="Sign Up"/>
-            </button>
+            {/*//TODO: HAVE THESE SHOW UP???*/}
+            <button>  <SignIn key="Sign In"/></button>
+            <button>    <SignUp key="Sign Up"/> </button>
+
         </>
     }
 
@@ -78,6 +78,11 @@ function SignIn() {
     }
     return <div>
         {error && <p>"Error logging in: " {error.message}</p>}
+        {/*//NOTE: i added these but maybe we should have these only show up once you click sign in?*/}
+        <input type="text" id="myInput"
+               placeholder="Email"/>
+        <input type="text" id="myInput"
+               placeholder="Password"/>
         <button onClick={() =>
             signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
         </button>
