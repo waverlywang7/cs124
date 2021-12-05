@@ -33,7 +33,6 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 function App(props) {
-
     const [user, loading, error] = useAuthState(auth);
 
     function verifyEmail() {
@@ -66,6 +65,8 @@ const FAKE_EMAIL = 'foo@bar.com';
 const FAKE_PASSWORD = 'xyzzyxx';
 
 function SignIn() {
+    const emailInput = useState(null);
+    const passwordInput = useState(null);
     const [
         signInWithEmailAndPassword,
         userCredential, loading, error
@@ -82,11 +83,13 @@ function SignIn() {
         {error && <p>"Error logging in: " {error.message}</p>}
         {/*//NOTE: i added these but maybe we should have these a little separate from the Google login... or only show up once you click sign in?*/}
         <input type="text" id="myInput"
+               ref={emailInput}
                placeholder="Email"/>
         <input type="text" id="myInput"
+               ref={passwordInput}
                placeholder="Password"/>
         <button onClick={() =>
-            signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
+            signInWithEmailAndPassword(emailInput.current.value, passwordInput.current.value)}>Login with Email/PW
         </button>
         <button onClick={() =>
             auth.signInWithPopup(googleProvider)}>Login with Google
@@ -95,6 +98,8 @@ function SignIn() {
 }
 
 function SignUp() {
+    const emailInput = useState(null);
+    const passwordInput = useState(null);
     const [
         createUserWithEmailAndPassword,
         userCredential, loading, error
@@ -109,9 +114,15 @@ function SignUp() {
     }
     return <div>
         {error && <p>"Error signing up: " {error.message}</p>}
+        <input type="text" id="myInput"
+               ref={emailInput}
+               placeholder="Email"/>
+        <input type="text" id="myInput"
+               ref={passwordInput}
+               placeholder="Password"/>
         <button onClick={() =>
-            createUserWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>
-            Create test user
+            createUserWithEmailAndPassword(emailInput.current.value, passwordInput.current.value)}>
+             Create test user
         </button>
 
     </div>
@@ -156,7 +167,6 @@ function SignedInApp(props) {
             completed: false
         };
 
-        console.log("add item", newItem);
         collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
     }
 
