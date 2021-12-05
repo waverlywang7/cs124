@@ -6,7 +6,7 @@ import {useCollection} from "react-firebase-hooks/firestore";
 import firebase from "firebase/compat";
 
 
-const collectionName = "waverlywang7-listitems";
+const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 
 function MyLists(props) {
@@ -53,7 +53,6 @@ function MyLists(props) {
                         >Create New List
                         </button>
                     </div>
-
 
                 </div>
                 <div className="LoL"> {listOfButtons} </div>

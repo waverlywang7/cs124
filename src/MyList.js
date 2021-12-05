@@ -8,7 +8,7 @@ import firebase from "firebase/compat";
 
 
 
-const collectionName = "waverlywang7-listitems";
+const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 
 function MyList(props) {
