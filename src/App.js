@@ -61,8 +61,6 @@ function App(props) {
 
 };
 
-const FAKE_EMAIL = 'foo@bar.com';
-const FAKE_PASSWORD = 'xyzzyxx';
 
 function SignIn() {
     const emailInput = useState(null);
@@ -135,7 +133,7 @@ function SignedInApp(props) {
 
     const [selectedListId, setSelectedListId] = useState(null);
     const [currentListName, setCurrentListName] = useState(null);
-    const [value, loading, error] = useCollection(collectionOfLists); // let MyList and myLists handle
+    const [value, loading, error] = useCollection(collectionOfLists) // let MyList and myLists handle
 
     let data = null;
     if (value !== undefined) {
@@ -149,14 +147,15 @@ function SignedInApp(props) {
     }
 
 
-    function handleAddList(listName, listId) {
-        const newList = {
-            id: listId,
-            name: listName
-        }
-        collectionOfLists.doc(listId).set(newList);
-
-    }
+    // function handleAddList(listName, listId) {
+    //     const newList = {
+    //         id: listId,
+    //         name: listName
+    //
+    //     }
+    //
+    //
+    // }
 
     function handleItemAdded(item, newPriority, listId) {
         const newItem = {
@@ -204,10 +203,11 @@ function SignedInApp(props) {
                 onListItemFieldChanged={handleListItemFieldChanged}
             /> :
             <MyLists
+                user={props.user}
                 db={db}
                 setListIdAndName={setListIdAndName}
                 list={data}
-                onListAdded={handleAddList}
+                // onListAdded={handleAddList}
             />
         }
     </div>;

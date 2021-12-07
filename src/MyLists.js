@@ -13,7 +13,7 @@ function MyLists(props) {
     const collectionOfLists = props.db.collection(collectionName);
     const [listName, setListName] = useState("");
     const listInput = useRef(null);
-    const [value, loading, error] = useCollection(collectionOfLists);
+    const [value, loading, error] = useCollection(collectionOfLists.where("owner","==", props.user.uid)); //TODO: where list.owner == owner
 
     let data = [];
     if (value !== undefined) {
@@ -24,9 +24,11 @@ function MyLists(props) {
     function handleAddList() {
         const newList = {
             name: listName,
-            id: generateUniqueID()
+            id: generateUniqueID(),
+            owner: props.user.uid
         }
-        props.onListAdded(newList.name, newList.id);
+        console.log(newList);
+        collectionOfLists.doc(newList.id).set(newList);
         listInput.current.value = "";
     }
 
