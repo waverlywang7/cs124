@@ -184,6 +184,7 @@ function SignedInApp(props) {
     function setListIdAndName(id, name) {
         setSelectedListId(id);
         setCurrentListName(name);
+        console.log(selectedListId, "selectedListId");
     }
 
     function returnHome() {
@@ -193,7 +194,7 @@ function SignedInApp(props) {
 
     return <div>
         {loading && <h1>Loading</h1>}
-        {data && selectedListId ? <MyList
+        {selectedListId ? <MyList
                 db={db}
                 name={currentListName}
                 listId={selectedListId}

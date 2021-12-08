@@ -131,6 +131,9 @@ function MyList(props) {
     return (
 
         <div class="myList">
+            <button type="button" name="add" id="add"
+            >Share List
+            </button>
             <div className="topRowButtons">
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List

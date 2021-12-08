@@ -45,6 +45,7 @@ function MyLists(props) {
             <div class="myLists">
                 <h2> MY LISTS </h2>
 
+
                 <div className="inputbar">
                     <input type="text" ref={listInput} id="myListInput"
                            onChange={(e) => setListName(e.target.value)}
