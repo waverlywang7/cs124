@@ -17,6 +17,7 @@ function MyList(props) {
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const input = useState(null);
+    const emailInput = useState(null);
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
@@ -117,6 +118,13 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
+    function handleShareList(emailInput) {
+        collectionOfLists.doc(props.listId).sharedWith.push(emailInput);
+        console.log(props.sharedWith);
+    }
+
+    const FAKE_EMAIL = "emily@email.com"
+
 
     function toggle0rder(){
         if (order.sortDirection === "asc"){
@@ -131,8 +139,10 @@ function MyList(props) {
     return (
 
         <div class="myList">
-            <button type="button" name="add" id="add"
-            >Share List
+            <input type="text" ref={emailInput} id="emailInput"
+                   onhange={(e) => handleShareList(e.target.value)}
+                   placeholder="email"/>
+            <button type="button" name="add" id="add">Share List
             </button>
             <div className="topRowButtons">
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}

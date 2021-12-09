@@ -21,22 +21,22 @@ function MyLists(props) {
             doc.data());
     }
 
-    function handleAddList() {
-        const newList = {
-            name: listName,
-            id: generateUniqueID(),
-            owner: props.user.uid
-        }
-        console.log(newList);
-        collectionOfLists.doc(newList.id).set(newList);
-        listInput.current.value = "";
-    }
+    // function handleAddList() {
+    //     const newList = {
+    //         name: listName,
+    //         id: generateUniqueID(),
+    //         owner: props.user.uid
+    //     }
+    //     console.log(newList);
+    //     collectionOfLists.doc(newList.id).set(newList);
+    //     listInput.current.value = "";
+    // }
 
 
     const listOfButtons = data.map(list => (
         <button
             name={list.name} id = "listNameButton"
-            onClick={(e) => props.setListIdAndName(list.id, list.name)}
+            onClick={(e) => props.setListIdAndName(list.id, list)}
         >{list.name}</button>
     ))
 
@@ -52,7 +52,7 @@ function MyLists(props) {
                            placeholder="Name your list"/>
 
                     <div className="addList">
-                        <button type="button" name="add" id="add" onClick={handleAddList}
+                        <button type="button" name="add" id="add" onClick={()=> props.handleAddList(listName, listInput)}
                         >Create New List
                         </button>
                     </div>

@@ -33,6 +33,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 function App(props) {
+    const collectionOfLists = db.collection(collectionName);
     const [user, loading, error] = useAuthState(auth);
 
     function verifyEmail() {
@@ -47,7 +48,10 @@ function App(props) {
             <SignedInApp {...props} user={user}/>
             <button type="button" onClick={() => auth.signOut()}>Logout</button>
             {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
+
         </div>
+
+
     } else {
         return <>
             {error && <p>Error App: {error.message}</p>}
@@ -58,6 +62,8 @@ function App(props) {
 
         </>
     }
+
+
 
 };
 
@@ -181,9 +187,9 @@ function SignedInApp(props) {
         collectionOfLists.doc(listId).delete();
     }
 
-    function setListIdAndName(id, name) {
+    function setListIdAndName(id, list) {
         setSelectedListId(id);
-        setCurrentListName(name);
+        setCurrentListName(list.name);
         console.log(selectedListId, "selectedListId");
     }
 
@@ -191,22 +197,39 @@ function SignedInApp(props) {
         setSelectedListId(null);
         setCurrentListName(null);
     }
+    function handleAddList(listName, listInput) {
+        const newList = {
+            name: listName,
+            id: generateUniqueID(),
+            owner: props.user.uid,
+            email: props.user.email,
+            sharedWith: [props.user.email]
+        }
+        console.log(listName, "new Name");
+        collectionOfLists.doc(newList.id).set(newList);
+        listInput.current.value = "";
+    }
+
+
 
     return <div>
         {loading && <h1>Loading</h1>}
         {selectedListId ? <MyList
                 db={db}
                 name={currentListName}
+                sharedWith = {handleAddList.sharedWith}
                 listId={selectedListId}
                 returnHome={returnHome}
                 onListDeleted={handleDeleteList}
                 onItemAdded={handleItemAdded}
                 onListItemFieldChanged={handleListItemFieldChanged}
+                handleAddList={handleAddList}
             /> :
             <MyLists
                 user={props.user}
                 db={db}
                 setListIdAndName={setListIdAndName}
+                handleAddList={handleAddList}
                 list={data}
                 // onListAdded={handleAddList}
             />
