@@ -141,18 +141,20 @@ function MyList(props) {
     return (
 
         <div class="myList">
-            <input type="text" ref={emailInput} id="emailInput"
 
-                   placeholder="email"/>
-            <button type="button" name="add" id="add"
-                    onClick={()=>handleShareList(emailInput)}>Share List
-            </button>
             <div className="topRowButtons">
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List
                 </button>
                 <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home</button>
+                <input type="text" ref={emailInput} id="emailInput"
+
+                       placeholder="email"/>
+                <button type="button" name="add" id="add"
+                        onClick={()=>handleShareList(emailInput)}>Share List
+                </button>
             </div>
+
             <div role="group" alt="poopy"></div>
             <h2 id ="h2" role="heading" aria-level= "1" aria-label={props.name}> {props.name} </h2>
 

@@ -43,7 +43,7 @@ function App(props) {
     if (loading) {
         return <p>Checking...</p>;
     } else if (user) {
-        return <div>
+        return <div id="signin">
             {user.displayName || user.email}
             <SignedInApp {...props} user={user}/>
             <button type="button" onClick={() => auth.signOut()}>Logout</button>
