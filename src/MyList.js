@@ -119,8 +119,10 @@ function MyList(props) {
     }
 
     function handleShareList(emailInput) {
+        console.log(emailInput, "emailInput")
+        console.log("props.sharedWith", props.sharedWith);
         collectionOfLists.doc(props.listId).sharedWith.push(emailInput);
-        console.log(props.sharedWith);
+
     }
 
     const FAKE_EMAIL = "emily@email.com"
@@ -140,9 +142,10 @@ function MyList(props) {
 
         <div class="myList">
             <input type="text" ref={emailInput} id="emailInput"
-                   onhange={(e) => handleShareList(e.target.value)}
+
                    placeholder="email"/>
-            <button type="button" name="add" id="add">Share List
+            <button type="button" name="add" id="add"
+                    onClick={()=>handleShareList(emailInput)}>Share List
             </button>
             <div className="topRowButtons">
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
