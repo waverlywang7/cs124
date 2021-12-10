@@ -138,15 +138,15 @@ function MyList(props) {
         if (props.user.uid != docSnapshot.data().owner){
             console.log("You don't have permission to share because you are not the owner")
         }
-        else{
+        else{ //personally i feel like this line isn't necessary because the permissions will catch if you are owner or not.
             if (docSnapshot.exists()){
                 if (props.user.email == eInput.current.value){
-                    console.log("You have already accessed this list")
+                    console.log("You have already access to this list")
                 }
                 await collectionOfLists.doc(props.listId).update({
                     sharedWith: [...docSnapshot.data().sharedWith, eInput.current.value]
                     })
-                console.log(docSnapshot.data().sharedWith);
+                console.log("the list of emails" ,docSnapshot.data().sharedWith);
 
             }else{
                 console.log("No document exists")
