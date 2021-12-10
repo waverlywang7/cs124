@@ -129,28 +129,41 @@ function MyList(props) {
 
     async function handleShareList(eInput) {
         // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
-        // collectionOfLists.doc(props.listId).sharedWith.push(eInput.current.value);
-
         // collectionOfLists.doc(props.listId).update({
         //     sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
         // })
         const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
         if (props.user.uid != docSnapshot.data().owner) {
-            console.log("You don't have permission to share because you are not the owner")
+            // return <div>"You don't have permission to share because you are not the owner"</div>
+            console.log("You don't have permission to share because you are not the owner");
         } else {
             if (docSnapshot.exists()) {
-                if (props.user.email == eInput.current.value) {
-                    console.log("You have already access to this list")
-                }
-                await collectionOfLists.doc(props.listId).update({
-                    sharedWith: [...docSnapshot.data().sharedWith, eInput.current.value]
-                })
-                console.log("the list of emails", docSnapshot.data().sharedWith);
+                // let query = collectionOfLists.doc(props.listId).where('sharedWith', 'array-contains', eInput.current.value);
+                // let querySnapshot = await query.get();
+                for (var i = 0; i < docSnapshot.data().sharedWith.length; i++) {
+                    if (props.user.email == eInput.current.value) {
+                        console.log("You already have access to the list");
+                    } else if (eInput.current.value == docSnapshot.data().sharedWith[i]) {
+                        console.log("You already shared to this person");
+                    } else {
+                        await collectionOfLists.doc(props.listId).update({
+                            sharedWith: [...docSnapshot.data().sharedWith, eInput.current.value]
+                        })
+                        // return <div> "Shared with:" {docSnapshot.data().sharedWith}</div>
+                        console.log("Shared with:", docSnapshot.data().sharedWith);
 
-            } else {
-                console.log("No document exists")
+                    }
+                }
             }
-        }
+            else
+                {
+
+                    // return <div>"No document exists"</div>
+                    console.log("No document exists");
+
+                }
+            }
+
 
     }
 
