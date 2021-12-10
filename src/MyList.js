@@ -119,11 +119,13 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
-    function handleShareList(emailInput) {
-        console.log(emailInput, "emailInput")
-        console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
-        collectionOfLists.doc(props.listId).sharedWith.push(emailInput);
-
+    function handleShareList(eInput) {
+        console.log(props.sharedWith, "sharedWith")
+        // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
+        // collectionOfLists.doc(props.listId).sharedWith.push(eInput.current.value);
+        collectionOfLists.doc(props.listId).update({
+            sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
+        })
     }
 
     const FAKE_EMAIL = "emily@email.com"
@@ -156,7 +158,7 @@ function MyList(props) {
                     {buttonClicked && <div className="emailSubmit">
                         <input type="text" ref={eInput} id="shareEmail"
                                placeholder="Enter email"/>
-                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}>Submit</button>
+                        <button type="button" name="submit" id="submit" onClick={() => {handleShareList(eInput)}}> Submit</button>
                     </div>}
                 </div>
             </div>
