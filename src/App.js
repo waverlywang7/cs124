@@ -205,7 +205,7 @@ function SignedInApp(props) {
             email: props.user.email,
             sharedWith: [props.user.email]
         }
-        console.log(listName, "new Name");
+        console.log(newList.sharedWith,"sharedWith");
         collectionOfLists.doc(newList.id).set(newList);
         listInput.current.value = "";
     }

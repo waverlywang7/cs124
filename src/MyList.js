@@ -17,7 +17,8 @@ function MyList(props) {
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const input = useState(null);
-    const emailInput = useState(null);
+    const eInput = useState(null);
+    const [buttonClicked, setButtonClicked] = useState(false);
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
@@ -120,7 +121,7 @@ function MyList(props) {
 
     function handleShareList(emailInput) {
         console.log(emailInput, "emailInput")
-        console.log("props.sharedWith", props.sharedWith);
+        console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
         collectionOfLists.doc(props.listId).sharedWith.push(emailInput);
 
     }
@@ -147,12 +148,17 @@ function MyList(props) {
                 >Delete List
                 </button>
                 <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home</button>
-                <input type="text" ref={emailInput} id="emailInput"
-
-                       placeholder="email"/>
-                <button type="button" name="add" id="add"
-                        onClick={()=>handleShareList(emailInput)}>Share List
-                </button>
+                <div className="shareButton">
+                    <button type="button" name="shareList" id="shareList"
+                            onClick={() => setButtonClicked(!buttonClicked)}
+                    >Share List
+                    </button>
+                    {buttonClicked && <div className="emailSubmit">
+                        <input type="text" ref={eInput} id="shareEmail"
+                               placeholder="Enter email"/>
+                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}>Submit</button>
+                    </div>}
+                </div>
             </div>
 
             <div role="group" alt="poopy"></div>
