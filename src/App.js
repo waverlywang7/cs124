@@ -75,7 +75,6 @@ function SignIn() {
         signInWithEmailAndPassword,
         userCredential, loading, error
     ] = useSignInWithEmailAndPassword(auth);
-
     if (userCredential) {
         // Shouldn't happen because App should see that
         // we are signed in.

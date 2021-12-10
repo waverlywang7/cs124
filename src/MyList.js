@@ -19,6 +19,7 @@ function MyList(props) {
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const input = useState(null);
     const eInput = useState(null);
+    const rInput = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false);
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
@@ -126,8 +127,30 @@ function MyList(props) {
         document.getElementById("ascending").classList.toggle("hideButton");
         document.getElementById("descending").classList.toggle("hideButton");
     }
+    async function handleUnshareList(email){
+        const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
+        if (props.user.uid != docSnapshot.data().owner) {
+            console.log("You do not have permission to do this.");
+        } else {
+            if (docSnapshot.exists()) {
+                if (props.user.email === email.current.value){
+                    console.log("You are the owner, you can't remove yourself.")
+                }else {
+                    let unshareEmail = docSnapshot.data().sharedWith
+                    const newsharedEmails = unshareEmail.filter((oneEmail) => oneEmail != email.current.value)
+                    console.log("unsharedEmail", newsharedEmails)
+                    // docSnapshot.update({sharedWith: firebase.firestore.FieldValue.arrayRemove(email)})
+                    await collectionOfLists.doc(props.listId).update({
+                        sharedWith: newsharedEmails
+                    })
+                }
+            } else{
+                console.log("No document exists");
+            }
+        }
+    }
 
-    async function handleShareList(eInput) {
+    async function handleShareList(email) {
         // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
         // collectionOfLists.doc(props.listId).update({
         //     sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
@@ -138,33 +161,26 @@ function MyList(props) {
             console.log("You don't have permission to share because you are not the owner");
         } else {
             if (docSnapshot.exists()) {
-                // let query = collectionOfLists.doc(props.listId).where('sharedWith', 'array-contains', eInput.current.value);
-                // let querySnapshot = await query.get();
                 for (var i = 0; i < docSnapshot.data().sharedWith.length; i++) {
-                    if (props.user.email == eInput.current.value) {
-                        console.log("You already have access to the list");
-                    } else if (eInput.current.value == docSnapshot.data().sharedWith[i]) {
-                        console.log("You already shared to this person");
-                    } else {
+                if (props.user.email == email.current.value) {
+                    console.log("You already have access to the list");
+                } else if (email.current.value == docSnapshot.data().sharedWith[i]) {
+                    console.log("You already shared to this person");
+                } else{
                         await collectionOfLists.doc(props.listId).update({
-                            sharedWith: [...docSnapshot.data().sharedWith, eInput.current.value]
+                            sharedWith: [...docSnapshot.data().sharedWith, email.current.value]
                         })
-                        // return <div> "Shared with:" {docSnapshot.data().sharedWith}</div>
+                        // console.log("einput", email.current.value);
                         console.log("Shared with:", docSnapshot.data().sharedWith);
-
                     }
-                }
-            }
-            else
-                {
-
-                    // return <div>"No document exists"</div>
-                    console.log("No document exists");
-
-                }
             }
 
-
+            } else {
+                // }
+                // return <div>"No document exists"</div>
+                console.log("No document exists");
+            }
+        }
     }
 
 //     async function listOfShared {
@@ -199,12 +215,15 @@ function MyList(props) {
                 <div className="shareButton">
                     <button type="button" name="shareList" id="shareList"
                             onClick={() => setButtonClicked(!buttonClicked)}
-                    >Share List
+                    >Sharing
                     </button>
                     {buttonClicked && <div className="emailSubmit">
                         <input type="text" ref={eInput} id="shareEmail"
-                               placeholder="Enter email"/>
-                        <button type="button" name="submit" id="submit" onClick={() => {handleShareList(eInput)}}> Submit</button>
+                               placeholder="Enter email to add"/>
+                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}> Share List</button>
+                        <input type="text" ref={rInput} id="unshareEmail"
+                               placeholder="Enter email you want to remove"/>
+                        <button type="button"name="unshareEmail" id="unshareEmail" onClick={() => handleUnshareList(rInput)}> Unshare List</button>
                     </div>}
                 </div>
             </div>
@@ -213,6 +232,7 @@ function MyList(props) {
             <h2 id ="h2" role="heading" aria-level= "1" aria-label={props.name}> {props.name} </h2>
 
             {buttonList}
+
             <div class="inputbar">
                 <input type="text" ref={input} id="myInput"
                        onChange={(e) => setInputNotEmpty(checkInput(e.target.value))}
