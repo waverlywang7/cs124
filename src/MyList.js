@@ -30,6 +30,13 @@ function MyList(props) {
         data = value.docs.map(doc =>
             doc.data());
     }
+    // const listOfShared = data.map(list => (
+    //     <button
+    //         name={list.sharedWith} id = "listNameButton"
+    //         // onClick={(e) => props.setListIdAndName(list.id, list)}
+    //     >{list.sharedWith}</button>
+    //
+    // ))
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
@@ -120,15 +127,15 @@ function MyList(props) {
     }
 
     function handleShareList(eInput) {
-        console.log(props.sharedWith, "sharedWith")
         // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
         // collectionOfLists.doc(props.listId).sharedWith.push(eInput.current.value);
+
         collectionOfLists.doc(props.listId).update({
             sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
         })
     }
 
-    const FAKE_EMAIL = "emily@email.com"
+
 
 
     function toggle0rder(){
@@ -146,6 +153,7 @@ function MyList(props) {
         <div class="myList">
 
             <div className="topRowButtons">
+
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List
                 </button>

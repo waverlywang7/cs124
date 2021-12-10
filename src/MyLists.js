@@ -13,7 +13,8 @@ function MyLists(props) {
     const collectionOfLists = props.db.collection(collectionName);
     const [listName, setListName] = useState("");
     const listInput = useRef(null);
-    const [value, loading, error] = useCollection(collectionOfLists.where("owner","==", props.user.uid)); //TODO: where list.owner == owner
+    // const [value, loading, error] = useCollection(collectionOfLists.where("email","in", props.sharedWith));
+    const [value, loading, error] = useCollection(collectionOfLists.where("owner","==", props.user.uid));
 
     let data = [];
     if (value !== undefined) {

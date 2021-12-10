@@ -230,6 +230,7 @@ function SignedInApp(props) {
                 db={db}
                 setListIdAndName={setListIdAndName}
                 handleAddList={handleAddList}
+                sharedWith = {handleAddList.sharedWith}
                 list={data}
                 // onListAdded={handleAddList}
             />
