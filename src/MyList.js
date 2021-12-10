@@ -4,6 +4,7 @@ import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
 import {useCollection} from "react-firebase-hooks/firestore";
+import {getDoc} from "firebase/firestore";
 import firebase from "firebase/compat";
 
 
@@ -126,13 +127,32 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
-    function handleShareList(eInput) {
+    async function handleShareList(eInput) {
         // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
         // collectionOfLists.doc(props.listId).sharedWith.push(eInput.current.value);
 
-        collectionOfLists.doc(props.listId).update({
-            sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
-        })
+        // collectionOfLists.doc(props.listId).update({
+        //     sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
+        // })
+        const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
+        if (props.user.uid != docSnapshot.data().owner){
+            console.log("You don't have permission to share because you are not the owner")
+        }
+        else{
+            if (docSnapshot.exists()){
+                if (props.user.email == eInput.current.value){
+                    console.log("You have already accessed this list")
+                }
+                await collectionOfLists.doc(props.listId).update({
+                    sharedWith: [...docSnapshot.data().sharedWith, eInput.current.value]
+                    })
+                console.log(docSnapshot.data().sharedWith);
+
+            }else{
+                console.log("No document exists")
+            }
+        }
+
     }
 
 

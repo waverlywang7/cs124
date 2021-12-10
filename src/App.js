@@ -215,6 +215,7 @@ function SignedInApp(props) {
     return <div>
         {loading && <h1>Loading</h1>}
         {selectedListId ? <MyList
+                user={props.user}
                 db={db}
                 name={currentListName}
                 sharedWith = {handleAddList.sharedWith}
