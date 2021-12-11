@@ -3,6 +3,7 @@ Waverly Wang
 CS124
 
 Lab 5
+
 ALTERNATIVE DESIGNS
 
 **Alternate design 1**
@@ -189,6 +190,47 @@ Yes, you can see what emails you shared with as seen above.
 
 If user A shares a list with user B, can user B see that list if they don't have a verified email address?
 Yes, they can see without a verified email address.
+
+**FIREBASE RULES**
+
+Here are the firebase rules we used:
+
+rules_version = '2';
+service cloud.firestore {
+match /databases/{database}/documents {
+function signedIn() {
+return request.auth.uid != null && request.auth.uid != null;
+}
+
+    function isDocOwner() {
+      return request.auth.uid == resource.data.owner;
+    }
+    
+    function updatedDocHasCorrectOwner() {
+      return request.auth.uid == request.resource.data.owner;
+    }
+    
+    
+    function isSharedWithMe() {
+      return request.auth.token.email in resource.data.sharedWith;
+    }
+
+    match /waverlywang7-listitems-AuthenticationRequired/{list} {
+    	match /tasks/{tasksId}{
+    	allow read, write: if true;
+    	}
+      allow read: if signedIn() && isSharedWithMe();
+      allow create: if signedIn() && updatedDocHasCorrectOwner();
+      allow update: if signedIn() && isSharedWithMe() 
+      allow delete: if signedIn() && isDocOwner();
+      
+    }
+    
+
+	}
+}
+
+
 
 * **TASK:** In a empty list, create an item named “Buy new John Grisham Book”
 
