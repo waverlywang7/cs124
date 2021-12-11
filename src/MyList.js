@@ -4,29 +4,23 @@ import React, {useState, useRef} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
 import {useCollection} from "react-firebase-hooks/firestore";
-import firebase from "firebase/compat";
+import {getDoc} from "firebase/firestore";
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
-    authDomain: "hmc-cs124-fa21-labs.firebaseapp.com",
-    projectId: "hmc-cs124-fa21-labs",
-    storageBucket: "hmc-cs124-fa21-labs.appspot.com",
-    messagingSenderId: "949410042946",
-    appId: "1:949410042946:web:0113b139a7e3cd1cc709db"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 
+const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
-const collectionName = "waverlywang7-listitems";
-const collectionOfLists = db.collection(collectionName);
 
 function MyList(props) {
+    const collectionOfLists = props.db.collection(collectionName);
     const [newItem, setNewItem] = useState({name: "", id: 0, completed: false});
     const [selectedId, setSelectedId] = useState(null);
     const [showCompletedItems, setShowCompletedItems] = useState("All");
     const input = useState(null);
+    const eInput = useState(null);
+    const rInput = useState(null);
+    const [buttonClicked, setButtonClicked] = useState(false);
+    const [sharedList, setSharedList] = useState("");
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
@@ -38,6 +32,7 @@ function MyList(props) {
         data = value.docs.map(doc =>
             doc.data());
     }
+
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
@@ -127,9 +122,62 @@ function MyList(props) {
         document.getElementById("descending").classList.toggle("hideButton");
     }
 
+    async function handleUnshareList(email) {
+        const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
+        if (props.user.uid != docSnapshot.data().owner) {
+            console.log("You do not have permission to do this.");
+        } else {
+            if (docSnapshot.exists()) {
+                if (props.user.email === email.current.value) {
+                    console.log("You are the owner, you can't remove yourself.")
+                } else {
+                    let unshareEmail = docSnapshot.data().sharedWith
+                    const newsharedEmails = unshareEmail.filter((oneEmail) => oneEmail != email.current.value)
+                    console.log("unsharedEmail", newsharedEmails)
+                    await collectionOfLists.doc(props.listId).update({
+                        sharedWith: newsharedEmails
+                    })
+                    console.log("Shared with:", docSnapshot.data().sharedWith);
+                    setSharedList(docSnapshot.data().sharedWith)
+                }
+            } else {
+                console.log("No document exists");
+            }
+        }
+    }
 
-    function toggle0rder(){
-        if (order.sortDirection === "asc"){
+    async function handleShareList(email) {
+
+        const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
+        if (props.user.uid != docSnapshot.data().owner) {
+            console.log("You don't have permission to share because you are not the owner");
+        } else {
+            if (docSnapshot.exists()) {
+
+                    console.log("email.current.value", email.current.value)
+                    if (props.user.email === email.current.value) {
+                        console.log("You already have access to the list");
+                    } else {
+                        await collectionOfLists.doc(props.listId).update({
+                            sharedWith: [...docSnapshot.data().sharedWith, email.current.value]
+                        })
+                        setSharedList(docSnapshot.data().sharedWith.map(listName => listName + ",     " ))
+                        console.log("Shared with:", docSnapshot.data().sharedWith);
+                    }
+
+
+            } else {
+
+                console.log("No document exists");
+            }
+
+        }
+    }
+
+
+
+    function toggle0rder() {
+        if (order.sortDirection === "asc") {
             setOrder({sortField: order.sortField, sortDirection: "desc"});
             setDirectionString("Descending");
         } else {
@@ -141,16 +189,39 @@ function MyList(props) {
     return (
 
         <div class="myList">
+
             <div className="topRowButtons">
+
                 <button type="button" name="delete" id="deleteList" onClick={() => props.onListDeleted(props.listId)}
                 >Delete List
                 </button>
                 <button type="button" name="Home" id="home" onClick={props.returnHome}> Return Home</button>
+                <div className="shareButton">
+                    <button type="button" name="shareList" id="shareList"
+                            onClick={() => setButtonClicked(!buttonClicked)}
+                    >Sharing
+                    </button>
+                    {buttonClicked && <div className="emailSubmit">
+                        <input type="text" ref={eInput} id="shareEmail"
+                               placeholder="Enter email to add"/>
+                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}> Share
+                            List
+                        </button>
+                        <input type="text" ref={rInput} id="unshareEmail"
+                               placeholder="Enter email you want to remove"/>
+                        <button type="button" name="unshareEmail" id="unshareEmail"
+                                onClick={() => handleUnshareList(rInput)}> Unshare List
+                        </button>
+                    </div>}
+                </div>
             </div>
-            <div role="group" alt="poopy"></div>
-            <h2 id ="h2" role="heading" aria-level= "1" aria-label={props.name}> {props.name} </h2>
+
+            <div id = "sharedList"> <h4> Shared with: {sharedList} </h4></div>
+
+            <h2 id="h2" role="heading" aria-level="1" aria-label={props.name}> {props.name} </h2>
 
             {buttonList}
+
             <div class="inputbar">
                 <input type="text" ref={input} id="myInput"
                        onChange={(e) => setInputNotEmpty(checkInput(e.target.value))}
@@ -159,7 +230,7 @@ function MyList(props) {
                 {inputNotEmpty && <div id="prioritycontainer">
                     <text id="priorityText"> Priority</text>
                     <div className="dropdown"
-                         aria-label = {' You are on the priority dropdown. You can choose low, medium or high' }>
+                         aria-label={' You are on the priority dropdown. You can choose low, medium or high'}>
 
                         <select name="Priority" ref={pInput} id="priorityInput">
                             <option value="c">low</option>
@@ -180,16 +251,22 @@ function MyList(props) {
             </div>
 
             <div className="sortRadio">
-                <label class = "radio-inline">
-                <input type="radio" id="html" name="fav_language" value="HTML" onClick={() => handleSort("priority", "asc")}/>Sort By Priority</label>
+                <label class="radio-inline">
+                    <input type="radio" id="html" name="fav_language" value="HTML"
+                           onClick={() => handleSort("priority", "asc")}/>Sort By Priority</label>
                 <label className="radio-inline">
-                <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {handleSort("name", "asc")}}/>Sort By Name</label>
-                    <label className="radio-inline">
-                        <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date</label>
+                    <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {
+                        handleSort("name", "asc")
+                    }}/>Sort By Name</label>
+                <label className="radio-inline">
+                    <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {
+                        handleSort("creationDate", "asc")
+                    }}/>Sort By Creation Date</label>
             </div>
 
-            <button class= "direction" onClick ={toggle0rder} id="order" aria-label={'Press this to Order by'+ directionString + 'You can toggle between ascending and descending'}>{directionString}</button>
-            <br />
+            <button class="direction" onClick={toggle0rder} id="order"
+                    aria-label={'Press this to Order by' + directionString + 'You can toggle between ascending and descending'}>{directionString}</button>
+            <br/>
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={

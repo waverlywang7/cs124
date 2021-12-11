@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
+#signin{
+  display:inline-block;
 
+
+
+
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
