@@ -2,7 +2,6 @@ Ria Gopu
 Waverly Wang
 CS124
 
-Lab 5
 
 ALTERNATIVE DESIGNS
 
@@ -56,26 +55,25 @@ We also added a feature on our app that lets you sort ascending or descending or
 
 For style changes, we decided to go with a blue screen since the dark purple was hard to read. We also made the tasks smaller so it was easier to read. We also made the buttons smaller and clustered together so they were associated together. Before, they were not aligned and took up the whole screen so you couldn’t view the tasks unless you were scrolling.
 
-**Alternate Design 6 **
+**FINAL DESIGN **
 
 Here is what our new interface looks like for a list. The one major change was changing the sort button into radio buttons so you can see which sorting button you chose. And the order direction button has become a toggle button for ascending and descending.
 
 * **TASK:** * Add support for multiple lists
   **Lab 4 Fig. 1**
-
+![](lab4fig1.png)s
 Here is a picture of our new design. We created a page where you can create a list and see multiple lists. Here is
 
 **Lab 4 Fig. 2**
-
+![](lab4fig2.png)
 Here it is with multiple lists.
 * **TASK:** * Make application accessible
   **Lab 4 Fig. 3**
-
+![](lab4fig3.png)
 Here is a picture of the desktop version of our application zoomed in at 200%. All of the text and buttons are still visible at this size.
 
 **Lab 4 Fig. 4**
-
-
+![](lab4fig4.png)
 
 Here is a picture of what happens when a user uses the tab button rather than their mouse to navigate the page: any modifiable/clickable element of the page is selectable. In this picture, a particular list is selected, and the user needs to hit the enter button in order to navigate into that list.
 
@@ -83,55 +81,32 @@ Here is a picture of what happens when a user uses the tab button rather than th
 * **TASK:** * Add support for multiple screen sizes (desktop/mobile/landscape/portrait).
 
 **Lab 4 Fig. 5**
-
-
+![](lab4fig5.png)
+![](lab4fig5a.png)
 Here is a picture of what the full desktop view looks like for our list of lists and lists page. As you can see, the input bar is larger than in the mobile view so you can see more of what you type.
 
 **Lab 4 Fig. 6a.**
-
+![](lab4fig6a.png)
 
 
 **Lab 4 Fig. 6b.**
-
-
-
-
+![](lab4fig6b.png)
 
 Here is a picture of what the mobile portrait view looks like for our multiple lists and singular list page.
 As you can see the input bar of the list items and the input bar has become smaller in reaction to becoming smaller.
 
 **Lab 4 Fig. 7a.**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](lab4fig7a.png)
 
 **Lab 4 Fig. 7b.**
-
+![](lab4fig7b.png)
 Here are pictures of what the mobile landscape view looks like for our list of lists and singular list. The user can scroll up and down to view the “Delete List” and “Return Home” buttons. As you can see, the input bar is larger than in the mobile view so you can see more of what you type.
 
 **TASK:**  Keyboard Accessibility and Screen Reader
 
 Here is a link to a video showing how you can access the functionality of our app without a keyboard and how the screen reader is able to read out-loud.
 https://www.youtube.com/watch?v=m79B8PYgvNY
+[Video](https://www.youtube.com/watch?v=m79B8PYgvNY)
 
 We added aria-labels on the checkboxes so it says “You have selected… [name of task]” so you know what the checkbox corresponds to.
 
@@ -140,96 +115,6 @@ We also added an aria-label on the priority dropdown that tells the user “This
 We also added an aria label on the order toggle button so is says “You are on the descending button. This is a toggle button between Ascending and Descending”. This provided more information than announcing “Descending button”
 
 **Below is a workflow for each task. The workflow for Alternate Design 5 and our final design is the same so we kept the pictures from lab 2 and lab 3. We only updated the task workflows that changed from lab2**
-
-
-** FINAL DESIGN LAB 5 **
-**Lab 5 Fig. 1**
-![](lab5fig1.png)
-Here is our final design. Here is what it looks like for login. We have a sign in and sign up tab. The user can sign in or sign up with an email and password. You can also sign up with Google.
-
-**Lab 5 Fig. 2**
-![](lab5fig2.png)
-Here is what our list of lists look like.You can logout and verify email. We also put the email of the user at the top.
-
-**Lab 5 Fig. 3**
-![](Lab5fig3.png)
-Here is what our singular list page looks like. You can say your email at the top. We added a Sharing button which you can click to reveal an input bar to share and unshare. There is also a list of emails of people you have shared with.
-
-
-
-We added the ability to share a list by typing in an email and clicking share list.
-
-**Lab 5 Fig. 4**
-![](lab5fig4.png)
-
-Here is a task flow for sharing and unsharing. You type in the email you want to share and once you click submit it will show up in the “Shared with” list.
-To unshare, you type an email that you want to remove and click the “Unshare List” button.
-**Lab 5 Fig. 5**
-![](lab5fig5.png)
-
-
-We can console.log the array called “sharedWith” which is all of the emails you are sharing with. There is also console.log telling you you cannot share with yourself and you will not be added to the “sharedWith” array.
-We also have console.log saying you cannot remove sharing from yourself.
-
-Here are our design decisions for sharing:
-
-A shared task list is editable by either the original owner or by a user it is shared with. They can delete and add tasks and have read/write access.
-
-If user A shares a list with user B, can user B share that list with user C?
-User B cannot.
-No, User B cannot because they are not the owner.
-
-If user A shares a list with user B, can user B delete that list?
-No. B will get a permissions error because user B is not the owner of the list.
-
-If user A shares a list with user B, does user B need to accept that sharing, or will a shared list just show up?
-The shared list will just show up in their list of lists. The User B doesn’t have to share with User A to see what User A shared with User B. User B doesn’t have to be the owner of the list User A shared.
-
-Should shared lists be distinguishable in the UI from unshared lists?
-Yes, you can see what emails you shared with as seen above.
-
-If user A shares a list with user B, can user B see that list if they don't have a verified email address?
-Yes, they can see without a verified email address.
-
-**FIREBASE RULES**
-
-Here are the firebase rules we used:
-
-rules_version = '2';
-service cloud.firestore {
-match /databases/{database}/documents {
-function signedIn() {
-return request.auth.uid != null && request.auth.uid != null;
-}
-
-    function isDocOwner() {
-      return request.auth.uid == resource.data.owner;
-    }
-    
-    function updatedDocHasCorrectOwner() {
-      return request.auth.uid == request.resource.data.owner;
-    }
-    
-    
-    function isSharedWithMe() {
-      return request.auth.token.email in resource.data.sharedWith;
-    }
-
-    match /waverlywang7-listitems-AuthenticationRequired/{list} {
-    	match /tasks/{tasksId}{
-    	allow read, write: if true;
-    	}
-      allow read: if signedIn() && isSharedWithMe();
-      allow create: if signedIn() && updatedDocHasCorrectOwner();
-      allow update: if signedIn() && isSharedWithMe() 
-      allow delete: if signedIn() && isDocOwner();
-      
-    }
-    
-
-	}
-}
-
 
 
 * **TASK:** In a empty list, create an item named “Buy new John Grisham Book”
@@ -314,21 +199,20 @@ _The user would press “Delete All Completed Tasks” and the completed tasks w
 
 **USER TESTING**
 Draft of Final Design
-User A
-Was able to easily add titles and add list items easily
+User A found the sort button dropdown menu to require extra effort (two clicks) from the user, and suggested instead that we use a radio button menu. User A also found the order button menu to be excessive.
+User B thought that the desktop version of the todo list didn’t make the best use of the space available to us, since all of the text was clustered in the middle of the screen and was a small font size.
 
-User B
-Was able to easily add items to lists.
-Thought the toggle button was hard to understand and suggested we have something that highlights in color when the selected direction is chosen.
-asked how it would work if you don’t want to sort by any order.
-User C
-Suggested that our share list button didn’t need to be displayed all the time, and that we could toggle a general sharing button based on whether we wanted to share/unshare something.
+_Decisions Made After User Testing:_
+We converted the order button dropdown menu into simply one button that toggles between “Ascending” and “Descending”. We also took User A’s input and converted the sort button dropdown menu to a radio button menu, which also solved our problem of not displaying which sort category is currently selected.
+
+Based on User B’s input, we stretched out the input bar to line up with the heading and take up more space on the screen so that the user could see more of their input (for long items). We also increased the font size of the home screen.
 
 
 **CHALLENGES WE FACED:**
-One challenge we faced was enabling sharing; we were very confused about how to access the array we created, containing emails that the list has been shared with, because it was hard to access the fields of a particular document in firebase. Once we figured that out, we struggled with actually displaying the list in the account of the user that it had been shared with, but eventually we were able to figure that out as well.
+We encountered a lot of difficulty with implementing a homepage that redirects you to a particular list, because the task meant changing several parts of our existing code, which also meant that we had to modify all of the components that depended on the changed code. We ran into several roadblocks while reorganizing and refactoring our code after splitting up the firebase collection into several subcollections, since several components of our code needed refactoring and it was difficult to keep track of what exactly needed modifying. However, after going through our code thoroughly to ensure that all of the necessary changes were made, we were able to overcome this challenge.
 
 
 **PARTS OF THE DESIGN WE’RE MOST PROUD OF:**
-We’re most proud of our unshare feature, that allows you to remove sharing with a particular email address if you want to make your list private. We’re also proud of our feature that displays the email addresses of all of the people you’ve shared the list with.
+We’re most proud of the ascending/descending button that toggles when you click on it, because it is an elegant way to switch between ascending and descending order that only requires one click by the user. Using radio buttons for displaying “Sort by ____” felt like a very user-friendly and intuitive solution, because it also only requires one click by the user, and removes ambiguity about what is currently being sorted.
+
 

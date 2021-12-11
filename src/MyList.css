@@ -199,11 +199,6 @@
     /*    text-decoration: none;*/
     /*    display: block;*/
     /*}*/
-    #sharing{
-        font-family: "Times New Roman";
-        display: flex;
-        align-content: space-evenly;
-    }
     .hideButton{
         display: none;
     }
