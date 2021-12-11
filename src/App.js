@@ -13,6 +13,7 @@ import {
     useCreateUserWithEmailAndPassword,
     useSignInWithEmailAndPassword
 } from 'react-firebase-hooks/auth';
+import {getDoc} from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -182,8 +183,14 @@ function SignedInApp(props) {
         });
     }
 
-    function handleDeleteList(listId) {
-        collectionOfLists.doc(listId).delete();
+    async function handleDeleteList(listId) {
+        const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
+        if (collectionOfLists.doc(listId).data().owner != props.user.uid){
+            console.log("you cannot delete a list because you are not the owner")
+        } else{
+            collectionOfLists.doc(listId).delete();
+        }
+
     }
 
     function setListIdAndName(id, list) {
