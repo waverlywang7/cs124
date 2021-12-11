@@ -1,0 +1,25 @@
+.LoL{
+    display: grid;
+    width: auto;
+}
+
+#listNameButton{
+    border: none;
+    align-content: start;
+    font-size: 20px;
+    text-align: start;
+}
+
+
+/*for desktop*/
+@media screen and (min-width: 640px)  {
+    .addList {
+        display: inline-block;
+       position: relative;
+        padding-top: 5px;
+        padding-left: 6px;
+    }
+    #myListInput{
+        width: 400px;
+    }
+}

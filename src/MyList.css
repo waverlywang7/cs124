@@ -1,129 +1,427 @@
-.myList{
-    position: absolute;
-    left: 0.5cm;
+/*for mobile landscape */
+ @media screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape) {
+     .myList{
+         position: fixed;
+         left: 9cm;
+         flex: none;
+         width: 640px;
+         max-height: 500px;
+     }
+     h2{
+         font-size: 30pt;
+     }
+     body{
+         font-family: "Avenir";
+         color: White;
+         display: flex;
+         flex-direction: row;
+         flex-grow: 1;
+         justify-content: flex-start;
+         padding-left: 24px;
+         font-size: 10pt;
+         background-color: #83A1CD;
+         align-content: flex-start;
+
+     }
+
+     .taskList{
+         margin-top: 10px;
+     }
+
+     .inputbar {
+         align-content: flex-start;
+         margin-bottom: 0.5cm;
+         margin: 0 -5px;
+     }
+
+     #add{
+         background-color: orange;
+     }
+     #myInput {
+         width: 300px;
+         length: 50px;
+         /*padding-bottom: 20px;*/
+     }
+
+ }
+
+/*once you reach max-width this max width have a fixed container*/
+@media screen and (max-width: 302px) and (max-height: 500px){
+    .myList {
+        position: absolute;
+        flex: none;
+        width: 302px;
+        height: 500px;
+        left: 0.5cm;
+
+    }
+    .body{
+        background-color: red;
+
+        /*flex-basis: 302px;*/
+        /*flex-grow: 0;*/
+        /*flex-shrink: 0;*/
+
+    }
+ }
+
+/*for mobile profile*/
+@media screen and (max-width: 765px)  {
+    .myList{
+        position: absolute;
+        left: 0.5cm;
+    }
+    h2{
+        font-size: 24pt;
+    }
+    body {
+        font-family: "Avenir";
+        color: White;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        flex-start: center;
+        padding-left: 24px;
+        font-size: 10pt;
+        background-color: #83A1CD;
+        align-content: flex-start;
+    }
+
+    .taskList{
+        margin-top: 10px;
+    }
+
+    .inputbar {
+        display: flex;
+        align-content: flex-start;
+        margin-bottom: 0.5cm;
+        margin: 0 -5px;
+    }
+
+    #add{
+        background-color: orange;
+    }
+    #myInput {
+        display: flex;
+        width: 275px;
+        height: 25px;
+    }
+
+    button{
+        font-family: "Avenir";
+        border-style: solid;
+        border: 2px solid #4B73CA;
+        font-size: 10pt;
+        display: flex;
+        margin: 3px;
+        padding: 8px 8px;
+        overflow: hidden;
+        background: transparent;
+        color: inherit;
+        line-height: normal;
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        -webkit-appearance: none;
+        width: auto;
+        length: auto;
+        /*margin-bottom: 0.5cm;*/
+
+
+    }
+
+    #priorityText{
+        padding-left: 2px;
+        font-size:10pt;
+        /*aligning the priority*/
+    }
+
+    #deleteAll{
+        background-color:darkred;
+    }
+
+    #delete{
+        background-color:darkgreen;
+    }
+
+    .deleteButtons{
+        display: flex;
+        align-content: flex-start;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        float: none;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        /*added stuff above*/
+        /*display: contents;*/
+        /*position: absolute;*/
+        color: black;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /*radio button styling*/
+    .sortRadio{
+        padding-top: 10px;
+        padding-right: 10px;
+        position: relative;
+        right: 6px;
+        display: inline-block;
+
+    }
+
+    .radio-inline {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .direction{
+        position: relative;
+        bottom: 27px;
+        left: 8px;
+    }
+
+    /*!* Links inside the dropdown *!*/
+    /*.dropdown-content a {*/
+    /*    color: black;*/
+    /*    padding: 12px 16px;*/
+    /*    text-decoration: none;*/
+    /*    display: block;*/
+    /*}*/
+    .hideButton{
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+    /* Change color of dropdown elements on hover */
+    .dropdown-content option:hover {background-color: lightblue;}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+
+    .up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
 }
-h2{
-    font-size: 24pt;
+
+/*for desktop*/
+@media screen and (min-width: 765px)  {
+    .myList{
+        position: absolute;
+        left: 9cm;
+    }
+    h2{
+        font-size: 30pt;
+
+    }
+    body{
+        font-family: "Avenir";
+        color: White;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        flex-start: center;
+        padding-left: 24px;
+        font-size: 10pt;
+        background-color: #83A1CD;
+        align-content: flex-start;
+    }
+
+    .taskList{
+        margin-top: 10px;
+    }
+
+    .inputbar {
+        align-content: flex-start;
+        margin-bottom: 0.5cm;
+        margin: 0 -5px;
+    }
+
+    #add{
+        background-color: orange;
+    }
+    #myInput {
+
+        display: flex;
+        width: 400px;
+        height: 25px;
+        /*padding-bottom: 20px;*/
+    }
+
+    button{
+        font-family: "Avenir";
+        border-style: solid;
+        border: 2px solid #4B73CA;
+        font-size: 10pt;
+        display: flex;
+        margin: 3px;
+        padding: 8px 8px;
+        overflow: hidden;
+        background: transparent;
+        color: inherit;
+        line-height: normal;
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        -webkit-appearance: none;
+        width: auto;
+        length: auto;
+        /*margin-bottom: 0.5cm;*/
+
+
+    }
+
+
+    .topRowButtons{
+        border: none;
+    }
+
+    .sortDropdown{
+        display: inline-grid;
+        grid-template-columns: auto auto;
+    }
+
+    #sort{
+        grid-column:1;
+    }
+
+    #order{
+        grid-column:2;
+    }
+
+    #priorityText{
+        padding-left: 2px;
+        font-size:10pt;
+        /*aligning the priority*/
+    }
+
+    #deleteAll{
+        background-color:darkred;
+    }
+
+    #delete{
+        background-color:darkgreen;
+    }
+
+    .deleteButtons{
+        display: flex;
+        align-content: flex-start;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .sortRadio{
+        padding-top: 10px;
+        padding-right: 10px;
+        position: relative;
+        right: 6px;
+        display: inline-block;
+    }
+    .radio-inline {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .direction{
+        position: relative;
+       bottom: 27px;
+       left: 8px;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        float: none;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        /*added stuff above*/
+        /*display: contents;*/
+        /*position: absolute;*/
+        color: black;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /*!* Links inside the dropdown *!*/
+    /*.dropdown-content a {*/
+    /*    color: black;*/
+    /*    padding: 12px 16px;*/
+    /*    text-decoration: none;*/
+    /*    display: block;*/
+    /*}*/
+    .hideButton{
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+    /* Change color of dropdown elements on hover */
+    .dropdown-content option:hover {background-color: lightblue;}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
 }
-body {
-    font-family: "Avenir";
-    color: White;
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: space-evenly;
-    flex-start: center;
-    padding-left: 24px;
-    font-size: 10pt;
-    background-color: #83A1CD;
-    align-content: flex-start;
-}
 
-.taskList{
-    margin-top: 10px;
-}
+/*once you reach max-width this max width have a fixed container*/
+@media screen and (max-width: 302px) and (max-height: 500px){
+    .myList {
+        position: absolute;
+        flex: none;
+        width: 302px;
+        height: 500px;
+        left: 0.5cm;
 
-.inputbar {
-    display: flex;
-    align-content: flex-start;
-    margin-bottom: 0.5cm;
-    margin: 0 -5px;
+    }
+
+
+
 }
 
 
 
 
-#add{
-    background-color: orange;
-}
-#myInput {
-    width: 150px;
-}
 
 
 
-button{
-    font-family: "Avenir";
-    border-style: solid;
-    border: 2px solid #4B73CA;
-    font-size: 10pt;
-    display: flex;
-    margin: 3px;
-    padding: 8px 8px;
-    overflow: hidden;
-    background: transparent;
-    color: inherit;
-    line-height: normal;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-    width: auto;
-    length: auto;
-    /*margin-bottom: 0.5cm;*/
 
 
-}
 
-#priorityText{
-    padding-left: 2px;
-    font-size:10pt;
-    /*aligning the priority*/
-}
 
-#deleteAll{
-    background-color:darkred;
-}
-
-#delete{
-    background-color:darkgreen;
-}
-
-.deleteButtons{
-    display: flex;
-    align-content: flex-start;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    float: none;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    /*added stuff above*/
-    /*display: contents;*/
-    /*position: absolute;*/
-    color: black;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/*!* Links inside the dropdown *!*/
-/*.dropdown-content a {*/
-/*    color: black;*/
-/*    padding: 12px 16px;*/
-/*    text-decoration: none;*/
-/*    display: block;*/
-/*}*/
-.hideButton{
-    display: none;
-}
-
-.show {
-    display: block;
-}
-/* Change color of dropdown elements on hover */
-.dropdown-content option:hover {background-color: lightblue;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}

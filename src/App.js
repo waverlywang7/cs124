@@ -1,11 +1,13 @@
 import './App.css';
 import firebase from "firebase/compat";
 import MyList from './MyList';
+import MyLists from './MyLists';
 import React from "react";
-import { useState } from 'react';
+import {useState} from 'react';
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import './ListItem.js'
 import {useCollection} from "react-firebase-hooks/firestore";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
@@ -18,71 +20,88 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
 const collectionName = "waverlywang7-listitems";
-const listCollection = db.collection(collectionName);
+const collectionOfLists = db.collection(collectionName);
+
 function App(props) {
-    const query = listCollection;
-    // create a state
-    const [order, setOrder] = useState({sortField:"name",sortDirection:"asc"});
-    //const query = listCollection;
-    const[sortSelected, setSortSelected] = useState(false);
-    const [value, loading, error] = useCollection(query.orderBy(order.sortField, order.sortDirection));
+    const [selectedListId, setSelectedListId] = useState(null);
+    const [currentListName, setCurrentListName] = useState(null);
+    const [value, loading, error] = useCollection(collectionOfLists); // let MyList and myLists handle
 
     let data = null;
     if (value !== undefined) {
         data = value.docs.map(doc =>
             doc.data());
-    }
-
-    function handleDeleteListItem(listItemId){
-        listCollection.doc(listItemId).delete();
-    }
-
-    function handleItemAdded(item, newPriority) {
-        const newItem = {
-                id: generateUniqueID(),
-                priority: newPriority,
-                name: item,
-                creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
-                completed: false
-            };
-            listCollection.doc(newItem.id).set(newItem);
-    }
-
-    function handleDeleteAll() {
-        let filterList = data.filter(listItem => listItem.completed);
-        for (let i = 0; i < filterList.length; i ++) {
-            handleDeleteListItem(filterList[i].id);
+        if (selectedListId !== null && (!data.find(function (element) {
+            return element.id === selectedListId;
+        }))) {
+            setSelectedListId(null);
         }
     }
 
-    function handleListItemFieldChanged(listItemId, field, value) {
-        listCollection.doc(listItemId).update({
+
+    function handleAddList(listName, listId) {
+        const newList = {
+            id: listId,
+            name: listName
+        }
+        collectionOfLists.doc(listId).set(newList);
+
+    }
+
+
+    function handleItemAdded(item, newPriority, listId) {
+        const newItem = {
+            id: generateUniqueID(),
+            priority: newPriority,
+            name: item,
+            creationDate: firebase.database.ServerValue.TIMESTAMP, //changed from 00-00-00
+            completed: false
+        };
+
+        console.log("add item", newItem);
+        collectionOfLists.doc(listId).collection("tasks").doc(newItem.id).set(newItem);
+    }
+
+    function handleListItemFieldChanged(listId, listItemId, field, value) {
+        console.log("field", field);
+        console.log("value", value);
+        collectionOfLists.doc(listId).collection("tasks").doc(listItemId).update({
             [field]: value,
         });
     }
 
-    function handleSort(name, direction) {
-        setOrder({sortField: name, sortDirection: direction});
-        setSortSelected(true);
+    function handleDeleteList(listId) {
+        collectionOfLists.doc(listId).delete();
     }
 
-    function toggleSort(direction) {
-        console.log(order.name);
-        setOrder({sortField: order.sortField, sortDirection: direction});
+    function setListIdAndName(id, name) {
+        setSelectedListId(id);
+        setCurrentListName(name);
+    }
+
+    function returnHome() {
+        setSelectedListId(null);
+        setCurrentListName(null);
     }
 
     return <div>
-        {loading ? <div>Loading...</div> :
-        <MyList list={data}
+        {selectedListId ? <MyList
+                name={currentListName}
+                listId={selectedListId}
+                returnHome={returnHome}
+                onListDeleted={handleDeleteList}
                 onItemAdded={handleItemAdded}
-                onDeleteListItem={handleDeleteListItem}
                 onListItemFieldChanged={handleListItemFieldChanged}
-                onDeleteAll={handleDeleteAll}
-                onSort={handleSort}
-                toggleSort={toggleSort}
-        />}
-        </div>;
-    };
+            /> :
+            <MyLists
+                setListIdAndName={setListIdAndName}
+                list={data}
+                onListAdded={handleAddList}
+            />
+        }
+    </div>;
+};
 
 export default App;

@@ -1,84 +1,187 @@
+/*for desktop*/
+@media screen and (min-width: 765px) {
+    input[type=checkbox] {
+        transform: scale(2);
+        /*changed from 3 to 2*/
+    }
 
-input[type=checkbox]{
-    transform: scale(2);
-    /*changed from 3 to 2*/
+    input {
+        /*size of input*/
+        font-family: "Avenir";
+        font-size: 10pt;
+        display: flex;
+        width: auto;
+        margin: 0 10px;
+    }
+
+
+    input[type=text] {
+        width: 300px;
+    }
+
+    button {
+        font-family: "Avenir";
+        border-radius: 4px;
+        font-size: 10pt;
+        display: flex;
+        margin: 0;
+        /*padding: 8px 8px;*/
+        overflow: hidden;
+        color: inherit;
+        line-height: normal;
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        -webkit-appearance: none;
+        width: 275px;
+        borderStyle: solid;
+
+
+    }
+
+    .deleteAllButton {
+        color: white;
+
+    }
+
+    .selected1 {
+
+        background-color: #05386B;
+
+    }
+
+
+    .addTask {
+        padding-right: 100px;
+    }
+
+    h3 {
+        font-size: 12pt;
+        letter-spacing: 3px;
+    }
+
+    h3:hover {
+        color: orange;
+    }
+
+    .container > * {
+        display: inline-block;
+    }
+
+    .deleteTask {
+        color: white;
+        text-align: center;
+    }
+
+    .addTask {
+        display: inline;
+        color: white;
+        text-align: center;
+    }
+
+    .container2 > * {
+        display: inline-block;
+    }
+
+
+    .container2 {
+        justify-content: space-between;
+        margin: 0 8px;
+    }
 }
 
-input{
-    /*size of input*/
-    font-family: "Avenir";
-    font-size: 10pt;
-    display: flex;
+
+/*for mobile profile*/
+@media screen and (max-width: 765px) {
+    input[type=checkbox] {
+        transform: scale(2);
+        /*changed from 3 to 2*/
+    }
+
+    input {
+        /*size of input*/
+        font-family: "Avenir";
+        font-size: 10pt;
+        display: flex;
+        width: auto;
+        margin: 0 10px;
+    }
+
+
+    input[type=text] {
+        width: 150px;
+    }
+
+    button {
+        font-family: "Avenir";
+        border-radius: 4px;
+        font-size: 10pt;
+        display: flex;
+        margin: 0;
+        overflow: hidden;
+        color: inherit;
+        line-height: normal;
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        -webkit-appearance: none;
+        width: 275px;
+        borderStyle: solid;
+
+
+    }
+
+    .deleteAllButton {
+        color: white;
+
+    }
+
+    .selected1 {
+
+        background-color: #05386B;
+
+    }
+
+
+    .addTask {
+        padding-right: 100px;
+    }
+
+    h3 {
+        font-size: 12pt;
+        letter-spacing: 3px;
+    }
+
+    h3:hover {
+        color: orange;
+    }
+
+    .container > * {
+        display: inline-block;
+    }
+
+    .deleteTask {
+        color: white;
+        text-align: center;
+    }
+
+    .addTask {
+        display: inline;
+        color: white;
+        text-align: center;
+    }
+
+    .container2 > * {
+        display: inline-block;
+    }
+
+
+    .container2 {
+        justify-content: space-between;
+        margin: 0 8px;
+    }
 }
 
-
-button{
-    font-family: "Avenir";
-    border-radius: 4px;
-    font-size: 10pt;
-    display: flex;
-    margin: 0;
-    /*padding: 8px 8px;*/
-    overflow: hidden;
-    color: inherit;
-    line-height: normal;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-    width: 275px;
-    borderStyle: solid;
-
-
-}
-
-.deleteAllButton{
-    color: white;
-
-}
-.selected1 {
-
-    background-color: #05386B;
-
-}
-
-
-
-.addTask{
-    padding-right: 100px;
-}
-h3 {
-    font-size: 12pt;
-    letter-spacing: 3px;
-}
-h3:hover{
-    color: orange;
-}
-
-.container > * {
-    display: inline-block;
-}
-
-.deleteTask{
-    color: white;
-    text-align: center;
-}
-
-.addTask{
-    display: inline;
-    color: white;
-    text-align: center;
-}
-
-.container2 > * {
-    display: inline-block;
-}
-
-
-.container2{
-    justify-content: space-between;
-    margin: 0 8px;
-}
-
-input{
-    margin:0 10px;
+@media screen and (max-height: 360px) and (max-width: 640px) and (orientation: landscape) {
+    input[type=text] {
+        width: 300px;
+    }
 }
