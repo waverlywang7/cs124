@@ -22,17 +22,6 @@ function MyLists(props) {
             doc.data());
     }
 
-    // function handleAddList() {
-    //     const newList = {
-    //         name: listName,
-    //         id: generateUniqueID(),
-    //         owner: props.user.uid
-    //     }
-    //     console.log(newList);
-    //     collectionOfLists.doc(newList.id).set(newList);
-    //     listInput.current.value = "";
-    // }
-
 
     const listOfButtons = data.map(list => (
         <button

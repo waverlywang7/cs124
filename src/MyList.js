@@ -8,7 +8,6 @@ import {getDoc} from "firebase/firestore";
 import firebase from "firebase/compat";
 
 
-
 const collectionName = "waverlywang7-listitems-AuthenticationRequired";
 
 
@@ -21,6 +20,7 @@ function MyList(props) {
     const eInput = useState(null);
     const rInput = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false);
+    const [sharedList, setSharedList] = useState("");
     const pInput = useState(null);
     const [order, setOrder] = useState({sortField: "name", sortDirection: "asc"});
     const [sortSelected, setSortSelected] = useState(false);
@@ -127,15 +127,16 @@ function MyList(props) {
         document.getElementById("ascending").classList.toggle("hideButton");
         document.getElementById("descending").classList.toggle("hideButton");
     }
-    async function handleUnshareList(email){
+
+    async function handleUnshareList(email) {
         const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
         if (props.user.uid != docSnapshot.data().owner) {
             console.log("You do not have permission to do this.");
         } else {
             if (docSnapshot.exists()) {
-                if (props.user.email === email.current.value){
+                if (props.user.email === email.current.value) {
                     console.log("You are the owner, you can't remove yourself.")
-                }else {
+                } else {
                     let unshareEmail = docSnapshot.data().sharedWith
                     const newsharedEmails = unshareEmail.filter((oneEmail) => oneEmail != email.current.value)
                     console.log("unsharedEmail", newsharedEmails)
@@ -143,8 +144,9 @@ function MyList(props) {
                     await collectionOfLists.doc(props.listId).update({
                         sharedWith: newsharedEmails
                     })
+                    setSharedList(docSnapshot.data().sharedWith)
                 }
-            } else{
+            } else {
                 console.log("No document exists");
             }
         }
@@ -161,25 +163,24 @@ function MyList(props) {
             console.log("You don't have permission to share because you are not the owner");
         } else {
             if (docSnapshot.exists()) {
-                for (var i = 0; i < docSnapshot.data().sharedWith.length; i++) {
-                if (props.user.email == email.current.value) {
-                    console.log("You already have access to the list");
-                } else if (email.current.value == docSnapshot.data().sharedWith[i]) {
-                    console.log("You already shared to this person");
-                } else{
+                // for (let i = 0; i < docSnapshot.data().sharedWith.length; i++) {
+                    console.log("email.current.value", email.current.value)
+                    if (props.user.email === email.current.value) {
+                        console.log("You already have access to the list");
+                    } else {
                         await collectionOfLists.doc(props.listId).update({
                             sharedWith: [...docSnapshot.data().sharedWith, email.current.value]
                         })
-                        // console.log("einput", email.current.value);
-                        console.log("Shared with:", docSnapshot.data().sharedWith);
+                        setSharedList(docSnapshot.data().sharedWith.map(listName => listName + ",     " ))
+                        console.log("Shared with:", docSnapshot.data().sharedWith, "sharedList", sharedList);
                     }
-            }
+                // }
 
             } else {
-                // }
-                // return <div>"No document exists"</div>
+
                 console.log("No document exists");
             }
+
         }
     }
 
@@ -192,8 +193,8 @@ function MyList(props) {
 // }
 
 
-    function toggle0rder(){
-        if (order.sortDirection === "asc"){
+    function toggle0rder() {
+        if (order.sortDirection === "asc") {
             setOrder({sortField: order.sortField, sortDirection: "desc"});
             setDirectionString("Descending");
         } else {
@@ -220,16 +221,21 @@ function MyList(props) {
                     {buttonClicked && <div className="emailSubmit">
                         <input type="text" ref={eInput} id="shareEmail"
                                placeholder="Enter email to add"/>
-                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}> Share List</button>
+                        <button type="button" name="submit" id="submit" onClick={() => handleShareList(eInput)}> Share
+                            List
+                        </button>
                         <input type="text" ref={rInput} id="unshareEmail"
                                placeholder="Enter email you want to remove"/>
-                        <button type="button"name="unshareEmail" id="unshareEmail" onClick={() => handleUnshareList(rInput)}> Unshare List</button>
+                        <button type="button" name="unshareEmail" id="unshareEmail"
+                                onClick={() => handleUnshareList(rInput)}> Unshare List
+                        </button>
                     </div>}
                 </div>
             </div>
 
-            <div role="group" alt="poopy"></div>
-            <h2 id ="h2" role="heading" aria-level= "1" aria-label={props.name}> {props.name} </h2>
+            <div id = "sharedList"> <h4> Shared with: {sharedList} </h4></div>
+
+            <h2 id="h2" role="heading" aria-level="1" aria-label={props.name}> {props.name} </h2>
 
             {buttonList}
 
@@ -241,7 +247,7 @@ function MyList(props) {
                 {inputNotEmpty && <div id="prioritycontainer">
                     <text id="priorityText"> Priority</text>
                     <div className="dropdown"
-                         aria-label = {' You are on the priority dropdown. You can choose low, medium or high' }>
+                         aria-label={' You are on the priority dropdown. You can choose low, medium or high'}>
 
                         <select name="Priority" ref={pInput} id="priorityInput">
                             <option value="c">low</option>
@@ -262,16 +268,22 @@ function MyList(props) {
             </div>
 
             <div className="sortRadio">
-                <label class = "radio-inline">
-                <input type="radio" id="html" name="fav_language" value="HTML" onClick={() => handleSort("priority", "asc")}/>Sort By Priority</label>
+                <label class="radio-inline">
+                    <input type="radio" id="html" name="fav_language" value="HTML"
+                           onClick={() => handleSort("priority", "asc")}/>Sort By Priority</label>
                 <label className="radio-inline">
-                <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {handleSort("name", "asc")}}/>Sort By Name</label>
-                    <label className="radio-inline">
-                        <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {handleSort("creationDate", "asc")}}/>Sort By Creation Date</label>
+                    <input type="radio" id="css" name="fav_language" value="CSS" onClick={() => {
+                        handleSort("name", "asc")
+                    }}/>Sort By Name</label>
+                <label className="radio-inline">
+                    <input type="radio" id="javascript" name="fav_language" value="JavaScript" onClick={() => {
+                        handleSort("creationDate", "asc")
+                    }}/>Sort By Creation Date</label>
             </div>
 
-            <button class= "direction" onClick ={toggle0rder} id="order" aria-label={'Press this to Order by'+ directionString + 'You can toggle between ascending and descending'}>{directionString}</button>
-            <br />
+            <button class="direction" onClick={toggle0rder} id="order"
+                    aria-label={'Press this to Order by' + directionString + 'You can toggle between ascending and descending'}>{directionString}</button>
+            <br/>
             <div class="deleteButtons">
                 {checkIfOneSelected() ? <div class="deleteTask">
                     <button type="button" name="delete" id="delete" onClick={
