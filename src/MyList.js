@@ -5,7 +5,7 @@ import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonBar from "./ButtonBar.js";
 import {useCollection} from "react-firebase-hooks/firestore";
 import {getDoc} from "firebase/firestore";
-import firebase from "firebase/compat";
+
 
 
 const collectionName = "waverlywang7-listitems-AuthenticationRequired";
@@ -32,13 +32,7 @@ function MyList(props) {
         data = value.docs.map(doc =>
             doc.data());
     }
-    // const listOfShared = data.map(list => (
-    //     <button
-    //         name={list.sharedWith} id = "listNameButton"
-    //         // onClick={(e) => props.setListIdAndName(list.id, list)}
-    //     >{list.sharedWith}</button>
-    //
-    // ))
+
 
     function handleSort(name, direction) {
         setOrder({sortField: name, sortDirection: direction});
@@ -140,10 +134,10 @@ function MyList(props) {
                     let unshareEmail = docSnapshot.data().sharedWith
                     const newsharedEmails = unshareEmail.filter((oneEmail) => oneEmail != email.current.value)
                     console.log("unsharedEmail", newsharedEmails)
-                    // docSnapshot.update({sharedWith: firebase.firestore.FieldValue.arrayRemove(email)})
                     await collectionOfLists.doc(props.listId).update({
                         sharedWith: newsharedEmails
                     })
+                    console.log("Shared with:", docSnapshot.data().sharedWith);
                     setSharedList(docSnapshot.data().sharedWith)
                 }
             } else {
@@ -153,17 +147,13 @@ function MyList(props) {
     }
 
     async function handleShareList(email) {
-        // console.log("props.sharedWith", collectionOfLists.doc(props.listId).sharedWith);
-        // collectionOfLists.doc(props.listId).update({
-        //     sharedWith: firebase.firestore.FieldValue.arrayUnion(eInput.current.value)
-        // })
+
         const docSnapshot = await getDoc(collectionOfLists.doc(props.listId));
         if (props.user.uid != docSnapshot.data().owner) {
-            // return <div>"You don't have permission to share because you are not the owner"</div>
             console.log("You don't have permission to share because you are not the owner");
         } else {
             if (docSnapshot.exists()) {
-                // for (let i = 0; i < docSnapshot.data().sharedWith.length; i++) {
+
                     console.log("email.current.value", email.current.value)
                     if (props.user.email === email.current.value) {
                         console.log("You already have access to the list");
@@ -172,9 +162,9 @@ function MyList(props) {
                             sharedWith: [...docSnapshot.data().sharedWith, email.current.value]
                         })
                         setSharedList(docSnapshot.data().sharedWith.map(listName => listName + ",     " ))
-                        console.log("Shared with:", docSnapshot.data().sharedWith, "sharedList", sharedList);
+                        console.log("Shared with:", docSnapshot.data().sharedWith);
                     }
-                // }
+
 
             } else {
 
@@ -184,13 +174,6 @@ function MyList(props) {
         }
     }
 
-//     async function listOfShared {
-//         const list = await getDoc(collectionOfLists.doc(props.listId)).data().sharedWith;
-//
-//     return {
-//     <div>{list}</div>
-// }
-// }
 
 
     function toggle0rder() {

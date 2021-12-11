@@ -1,9 +1,8 @@
 import './MyList.css';
 import './MyLists.css';
 import React, {useState, useRef} from 'react';
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import {useCollection} from "react-firebase-hooks/firestore";
-import firebase from "firebase/compat";
+
 
 
 const collectionName = "waverlywang7-listitems-AuthenticationRequired";
@@ -14,7 +13,7 @@ function MyLists(props) {
     const [listName, setListName] = useState("");
     const listInput = useRef(null);
     const [value, loading, error] = useCollection(collectionOfLists.where("sharedWith","array-contains", props.user.email));
-    // const [value, loading, error] = useCollection(collectionOfLists.where("owner","==", props.user.uid));
+
 
     let data = [];
     if (value !== undefined) {

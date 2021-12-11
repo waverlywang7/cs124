@@ -153,15 +153,6 @@ function SignedInApp(props) {
     }
 
 
-    // function handleAddList(listName, listId) {
-    //     const newList = {
-    //         id: listId,
-    //         name: listName
-    //
-    //     }
-    //
-    //
-    // }
 
     function handleItemAdded(item, newPriority, listId) {
         const newItem = {
